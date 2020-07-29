@@ -10,7 +10,7 @@ To install the chart with the release name `my-release`:
 helm install --name my-release <meilisearch-repo>/meilisearch
 ```
 
-This command deploys MeiliSearch on the Kubernetes clusger using the default configuration. The [Configuration]() section lists the parameters that can be configured during installation.
+This command deploys MeiliSearch on the Kubernetes cluster using the default configuration. The [Configuration]() section lists the parameters that can be configured during installation.
 
 ## Uninstalling the Chart
 
