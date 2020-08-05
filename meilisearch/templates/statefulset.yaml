@@ -24,17 +24,21 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.image.pullSecret }}
       {{- end }}
+      {{- if .Values.persistence.enabled }}
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: {{ include "meilisearch.fullname" . }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: data
               mountPath: /data.ms
+          {{- end }}
           envFrom:
           - configMapRef:
               name: {{ template "meilisearch.fullname" . }}-environment

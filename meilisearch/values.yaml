@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: getmeili/meilisearch
-  tag: v0.12.0
+  tag: v0.13.0
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -36,7 +36,14 @@ ingress:
 persistence:
   enabled: false
   accessMode: ReadWriteOnce
-  storageClass: "-"
+  ## Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
   size: 10Gi
 
 resources: {}
