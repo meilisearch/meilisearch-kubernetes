@@ -1,25 +1,42 @@
 # Meilisearch
 
-A chart to deploy [Meilisearch](https://github.com/meilisearch/MeiliSearch) search engine
+Helm works as a package manager to run pre-configured Kubernetes resources.
 
-## Installation
+MeiliSearch provides a customizable Helm chart, ready to deploy a [Meilisearch](https://github.com/meilisearch/MeiliSearch) instance on your Kubernetes cluster.
 
-To install the chart with the release name `my-release`:
+# Getting started
+
+First of all, you will need a Kubernetes cluster up and running. If you are not familiar with how Kuberentes works or need some help with this step, please check the [Kubernetes documentation](https://kubernetes.io/docs/home/).
+
+## Install kubectl
+
+`kubectl` is the most commonly used CLI to handle a Kubernetes cluster. The installation instructions are [available here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+
+## Install helm
+
+Helm CLI is a Command Line Interface which will automate chart management and installation on your Kubernetes cluster. To install Helm, follow the [Helm installation instructions](https://helm.sh/docs/intro/install/)
+
+### Install MeiliSearch chart
+
+Clone this repository and install the chart
 
 ```bash
-helm install --name my-release <meilisearch-repo>/meilisearch
+git clone https://github.com/meilisearch/meilisearch-kubernetes.git
+cd meilisearch-kubernetes
+# Replace <your-instance-name> with the name you would like to give to your service
+helm install <your-service-name> charts/meilisearch
 ```
 
-This command deploys MeiliSearch on the Kubernetes cluster using the default configuration. The [Configuration]() section lists the parameters that can be configured during installation.
+This command deploys MeiliSearch on your Kubernetes cluster using the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall/delete the MeiliSearch` deployment:
 
 ```bash
-helm delete my-release
+# Replace <your-instance-name> with the name of your deployed service
+helm uninstall <your-service-name>
 ```
-
 
 ## Parameters
 
