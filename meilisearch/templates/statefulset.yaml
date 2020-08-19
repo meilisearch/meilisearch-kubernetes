@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "meilisearch.fullname" . | lower }}
+  name: {{ include "meilisearch.fullname" . }}
   labels:
     app.kubernetes.io/name: {{ include "meilisearch.name" . }}
     helm.sh/chart: {{ include "meilisearch.chart" . }}
