@@ -26,6 +26,16 @@
 
 [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/master/meilisearch) ready to deploy a MeiliSearch instance in a kubernetes cluster
 
+### Getting started
+
+You should have helm installed and configured.
+```bash
+helm install meilisearch-production meilisearch
+```
+
+
+## Test 
+
 <hr>
 
 **MeiliSearch** provides and maintains many **SDKs and Integration tools** like this one. We want to provide everyone with an **amazing search experience for any kind of project**. If you want to contribute, make suggestions, or just know what's going on right now, visit us in the [integration-guides](https://github.com/meilisearch/integration-guides) repository.
