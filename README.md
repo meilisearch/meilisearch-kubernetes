@@ -22,19 +22,13 @@
 
 # MeiliSearch tools for Kubernetes deployment
 
+Kubernetes (K8s), is an open-source system for automating deployment, scaling, and management of containerized applications. You can run a MeiliSearch instance inside your Kubernetes cluster, either if you want to expose it to the outside world or just let some other applications use it inside your cluster and take advantage of the instant and powerful search engine.
+
+This repository's goal is to collect tools and examples of Kubernetes configurations and packages (Manifests, Helm charts, etc...) in order to make it simple to integrate a MeiliSearch instance in a Kubernetes cluster.
+
 ## HELM
 
-[Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/master/meilisearch) ready to deploy a MeiliSearch instance in a kubernetes cluster
-
-### Getting started
-
-You should have helm installed and configured.
-```bash
-helm install meilisearch-production meilisearch
-```
-
-
-## Test 
+Helm works as a package manager to run pre-configured Kubernetes resources. Using our [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/master/charts/meilisearch) you will be able to deploy a MeiliSearch instance in you Kubernetes cluster, with several customizable configurations. If you want some guides on how to use it, check our [Helm chart Getting started](https://github.com/meilisearch/meilisearch-kubernetes/blob/master/charts/meilisearch/README.md#getting-started). 
 
 <hr>
 
