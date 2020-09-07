@@ -6,7 +6,7 @@ metadata:
   name: meilisearch
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.2
+    helm.sh/chart: meilisearch-0.1.3
     app.kubernetes.io/instance: meilisearch
     app.kubernetes.io/managed-by: Helm
 ---
@@ -17,7 +17,7 @@ metadata:
   name: meilisearch-environment
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.2
+    helm.sh/chart: meilisearch-0.1.3
     app.kubernetes.io/instance: meilisearch
     app.kubernetes.io/managed-by: Helm
 data:
@@ -31,7 +31,7 @@ metadata:
   name: meilisearch
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.2
+    helm.sh/chart: meilisearch-0.1.3
     app.kubernetes.io/instance: meilisearch
     app.kubernetes.io/managed-by: Helm
 spec:
@@ -52,7 +52,7 @@ metadata:
   name: meilisearch
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.2
+    helm.sh/chart: meilisearch-0.1.3
     app.kubernetes.io/instance: meilisearch
     app.kubernetes.io/managed-by: Helm
 spec:
@@ -71,7 +71,7 @@ spec:
       serviceAccountName: meilisearch
       containers:
         - name: meilisearch
-          image: "getmeili/meilisearch:v0.13.0"
+          image: "getmeili/meilisearch:v0.14.0"
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:
@@ -98,7 +98,7 @@ metadata:
   name: meilisearch-test-connection
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.2
+    helm.sh/chart: meilisearch-0.1.3
     app.kubernetes.io/instance: meilisearch
     app.kubernetes.io/managed-by: Helm
   annotations:
