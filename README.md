@@ -30,7 +30,7 @@ First of all, you will need a Kubernetes cluster up and running. If you are not 
 
 ## Install kubectl
 
-`kubectl` is the most commonly used CLI to handle a Kubernetes cluster. The installation instructions are [available here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+`kubectl` is the most commonly used CLI to manage a Kubernetes cluster. The installation instructions are [available here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 ## Deploy MeiliSearch using manifests
 
@@ -80,4 +80,3 @@ helm uninstall <your-service-name>
 <hr>
 
 **MeiliSearch** provides and maintains many **SDKs and Integration tools** like this one. We want to provide everyone with an **amazing search experience for any kind of project**. If you want to contribute, make suggestions, or just know what's going on right now, visit us in the [integration-guides](https://github.com/meilisearch/integration-guides) repository.
-
