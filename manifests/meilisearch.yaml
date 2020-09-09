@@ -1,0 +1,112 @@
+---
+# Source: meilisearch/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: meilisearch
+  labels:
+    app.kubernetes.io/name: meilisearch
+    helm.sh/chart: meilisearch-0.1.3
+    app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: meilisearch/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: meilisearch-environment
+  labels:
+    app.kubernetes.io/name: meilisearch
+    helm.sh/chart: meilisearch-0.1.3
+    app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/managed-by: Helm
+data:
+  MEILI_ENV: "development"
+  MEILI_NO_ANALYTICS: "true"
+---
+# Source: meilisearch/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: meilisearch
+  labels:
+    app.kubernetes.io/name: meilisearch
+    helm.sh/chart: meilisearch-0.1.3
+    app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 7700
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: meilisearch
+    app.kubernetes.io/instance: meilisearch
+---
+# Source: meilisearch/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: meilisearch
+  labels:
+    app.kubernetes.io/name: meilisearch
+    helm.sh/chart: meilisearch-0.1.3
+    app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  serviceName: meilisearch
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: meilisearch
+      app.kubernetes.io/instance: meilisearch
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: meilisearch
+        app.kubernetes.io/instance: meilisearch
+    spec:
+      serviceAccountName: meilisearch
+      containers:
+        - name: meilisearch
+          image: "getmeili/meilisearch:v0.14.0"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: meilisearch-environment
+          ports:
+            - name: http
+              containerPort: 7700
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: meilisearch/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: meilisearch-test-connection
+  labels:
+    app.kubernetes.io/name: meilisearch
+    helm.sh/chart: meilisearch-0.1.3
+    app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['meilisearch:7700']
+  restartPolicy: Never
