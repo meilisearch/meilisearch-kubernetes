@@ -6,9 +6,7 @@ metadata:
   name: meilisearch
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.4
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/managed-by: Helm
 ---
 # Source: meilisearch/templates/configmap.yaml
 apiVersion: v1
@@ -17,9 +15,7 @@ metadata:
   name: meilisearch-environment
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.4
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/managed-by: Helm
 data:
   MEILI_ENV: "development"
   MEILI_NO_ANALYTICS: "true"
@@ -31,9 +27,7 @@ metadata:
   name: meilisearch
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.4
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
   ports:
@@ -52,9 +46,7 @@ metadata:
   name: meilisearch
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.4
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
   serviceName: meilisearch
@@ -98,9 +90,7 @@ metadata:
   name: meilisearch-test-connection
   labels:
     app.kubernetes.io/name: meilisearch
-    helm.sh/chart: meilisearch-0.1.4
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/managed-by: Helm
   annotations:
     "helm.sh/hook": test-success
 spec:
