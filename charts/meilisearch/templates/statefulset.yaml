@@ -51,10 +51,14 @@ spec:
             httpGet:
               path: /health
               port: http
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.livenessProbe.InitialDelaySeconds }}
           readinessProbe:
             httpGet:
               path: /health
               port: http
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.readinessProbe.InitialDelaySeconds }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
