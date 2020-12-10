@@ -43,3 +43,4 @@ jobs:
         with:
           command: install
           config: ct.yaml
+        
