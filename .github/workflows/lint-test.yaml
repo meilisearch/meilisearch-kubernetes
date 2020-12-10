@@ -1,6 +1,13 @@
 name: Lint and Test Charts
 
-on: pull_request
+on: 
+  pull_request:
+  push: 
+    # trying and staging branches are for BORS config
+    branches:
+      - trying
+      - staging
+      - master
 
 jobs:
   lint-test:
@@ -18,6 +25,15 @@ jobs:
         with:
           command: lint
           config: ct.yaml
+
+  helm-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Fetch history
+        run: git fetch --prune --unshallow
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0-alpha.3
