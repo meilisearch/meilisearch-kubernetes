@@ -1,8 +1,8 @@
 name: Lint and Test Charts
 
-on: 
+on:
   pull_request:
-  push: 
+  push:
     # trying and staging branches are for BORS config
     branches:
       - trying
