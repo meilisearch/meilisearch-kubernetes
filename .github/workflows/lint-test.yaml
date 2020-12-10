@@ -26,9 +26,6 @@ jobs:
           command: lint
           config: ct.yaml
 
-  helm-test:
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout
         uses: actions/checkout@v2
 
