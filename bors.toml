@@ -1,0 +1,3 @@
+status = ['lint-test', 'helm-test']
+# 1 hour timeout
+timeout-sec = 3600
