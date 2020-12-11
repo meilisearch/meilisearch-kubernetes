@@ -74,12 +74,16 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
+            periodSeconds: 10
+            initialDelaySeconds: 0
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
+            periodSeconds: 10
+            initialDelaySeconds: 0
           resources:
             {}
 ---
