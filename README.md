@@ -17,7 +17,7 @@
   <a href="https://github.com/meilisearch/meilisearch-kubernetes/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
 </p>
 
-<p align="center">The MeiliSearch tool for Kubernetes</p>
+<p align="center">The MeiliSearch tool for Kubernetes ⚓️</p>
 
 **MeiliSearch** is an open-source search engine. [Discover what MeiliSearch is!](https://github.com/meilisearch/MeiliSearch)
 
