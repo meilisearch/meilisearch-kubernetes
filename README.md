@@ -6,19 +6,20 @@
 
 <h4 align="center">
   <a href="https://github.com/meilisearch/MeiliSearch">MeiliSearch</a> |
+  <a href="https://docs.meilisearch.com">Documentation</a> |
+  <a href="https://slack.meilisearch.com">Slack</a> |
   <a href="https://www.meilisearch.com">Website</a> |
   <a href="https://blog.meilisearch.com">Blog</a> |
-  <a href="https://twitter.com/meilisearch">Twitter</a> |
-  <a href="https://docs.meilisearch.com">Documentation</a> |
   <a href="https://docs.meilisearch.com/faq">FAQ</a>
 </h4>
 
 <p align="center">
   <a href="https://github.com/meilisearch/meilisearch-kubernetes/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
-  <a href="https://slack.meilisearch.com"><img src="https://img.shields.io/badge/slack-MeiliSearch-blue.svg?logo=slack" alt="Slack"></a>
 </p>
 
-<p align="center">⚡ Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine MeiliSearch tools for Kubernetes deployment</p>
+<p align="center">The MeiliSearch tool for Kubernetes</p>
+
+**MeiliSearch** is an open-source search engine. [Discover what MeiliSearch is!](https://github.com/meilisearch/MeiliSearch)
 
 # MeiliSearch tools for Kubernetes deployment
 
@@ -75,7 +76,6 @@ To uninstall/delete the MeiliSearch` deployment:
 # Replace <your-instance-name> with the name of your deployed service
 helm uninstall <your-service-name>
 ```
-
 
 <hr>
 
