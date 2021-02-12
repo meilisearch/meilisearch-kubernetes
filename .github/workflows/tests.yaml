@@ -6,7 +6,7 @@ on:
     branches:
       - trying
       - staging
-      - master
+      - main
 
 jobs:
   linter:

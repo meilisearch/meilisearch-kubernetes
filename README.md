@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/master/assets/logos/logo.svg" alt="Instant-MeiliSearch" width="200" height="200" />
+  <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/logo.svg" alt="Instant-MeiliSearch" width="200" height="200" />
 </p>
 
 <h1 align="center">MeiliSearch Kubernetes</h1>
@@ -14,7 +14,7 @@
 </h4>
 
 <p align="center">
-  <a href="https://github.com/meilisearch/meilisearch-kubernetes/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
+  <a href="https://github.com/meilisearch/meilisearch-kubernetes/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
 </p>
 
 <p align="center">The MeiliSearch tool for Kubernetes ⚓️</p>
@@ -49,13 +49,13 @@ kubectl delete -f manifests/meilisearch.yaml
 
 ## Deploy MeiliSearch using Helm
 
-Helm works as a package manager to run pre-configured Kubernetes resources. Using our [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/master/charts/meilisearch) you will be able to deploy a MeiliSearch instance in you Kubernetes cluster, with several customizable configurations.
+Helm works as a package manager to run pre-configured Kubernetes resources. Using our [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch) you will be able to deploy a MeiliSearch instance in you Kubernetes cluster, with several customizable configurations.
 
 ### Install helm
 
 Helm CLI is a Command Line Interface which will automate chart management and installation on your Kubernetes cluster. To install Helm, follow the [Helm installation instructions](https://helm.sh/docs/intro/install/).
 
-The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/master/charts/meilisearch#parameters) section lists the parameters that can be configured during installation.
+The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch#parameters) section lists the parameters that can be configured during installation.
 
 ### Install MeiliSearch chart
 
