@@ -5,12 +5,12 @@
 replicaCount: 1
 
 readinessProbe:
-  periodSeconds: 10
-  InitialDelaySeconds: 0
+  periodSeconds: 60
+  InitialDelaySeconds: 60
 
 livenessProbe:
-  periodSeconds: 10
-  InitialDelaySeconds: 0
+  periodSeconds: 60
+  InitialDelaySeconds: 60
 
 image:
   repository: getmeili/meilisearch
