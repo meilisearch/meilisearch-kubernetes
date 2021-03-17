@@ -40,9 +40,42 @@ In order to use the different tools on this repository, you will first need to:
 minikube start
 ```
 
+You can install and test the Helm chart by running:
+
+```bash
+helm install meilisearch-chart-test -f charts/meilisearch/values.yaml charts/meilisearch
+```
+
+An easy way to access your MeiliSearch instance and test that it is up and running is by using port-forwarding. This can be achieved by running:
+
+```bash
+kubectl port-forward --namespace default svc/meilisearch 7700:7700
+```
+
+Finally, to uninstall the chart, run:
+
+```bash
+helm uninstall meilisearch-chart-test 
+```
+
 ### Tests and Linter <!-- omit in toc -->
 
-[Coming soon...]
+
+Each PR should pass the linter to be accepted.
+
+```bash
+# Linter
+helm lint charts/meilisearch 
+```
+
+Additionally, the GitHub CI will run a test to check if there are changes introduced to the charts. If changes were introduced, it will require you to update the Chart version 
+
+## Git Guidelines
+
+### Git Branches <!-- omit in toc -->
+
+All changes must be made in a branch and submitted as PR.
+We do not enforce any branch naming style, but please use something descriptive of your changes.
 
 ## Git Guidelines
 
@@ -84,9 +117,9 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration Tool](https://github.com/meilisearch/integration-guides/blob/main/guides/integration-tool-release.md).
 
-Every PR that is merged to `main` needs to the file `Chart.yaml`(charts/meilisearch/Chart.yaml) increasing the version of the chart accordingly to the modifications that will be introduced. The release process is then automated 
+⚠️ Every PR that is merged to `main` introducing changes to the Helm Chart needs to modify the file `Chart.yaml`(charts/meilisearch/Chart.yaml), by increasing the version of the chart accordingly.
 
-A GitHub Action will be triggered and publish a new release on the GitHub repository [releases](https://github.com/meilisearch/meilisearch-kubernetes/releases). This will enable users to start using the new version of the chart right away.
+Every PR that is merged to `main` triggers the automated release process, as specified at `.github/workflows/release-chart.yaml`. A GitHub Action will be triggered and publish a new release on the GitHub repository [releases](https://github.com/meilisearch/meilisearch-kubernetes/releases). This will enable users to start using the new version of the chart immediately after publishing.
 
 <hr>
 
