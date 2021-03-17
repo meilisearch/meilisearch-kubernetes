@@ -21,43 +21,53 @@
 
 **MeiliSearch** is an open-source search engine. [Discover what MeiliSearch is!](https://github.com/meilisearch/MeiliSearch)
 
-# MeiliSearch tools for Kubernetes deployment
+## Table of Contents <!-- omit in toc -->
+
+- [📖 Documentation](#-documentation)
+- [🚀 Getting Started](#-getting-started)
+- [⚙️ Development Workflow and Contributing](#️-development-workflow-and-contributing)
+
+## 📖 Documentation
+
+See our [Documentation](https://docs.meilisearch.com/learn/tutorials/getting_started.html) or our [API References](https://docs.meilisearch.com/reference/api/).
+
+## 🚀 Getting Started
+
+# MeiliSearch tools for Kubernetes deployment <!-- omit in toc -->
 
 Kubernetes (K8s), is an open-source system for automating deployment, scaling, and management of containerized applications. You can run a MeiliSearch instance inside your Kubernetes cluster, either if you want to expose it to the outside world or just let some other applications use it inside your cluster and take advantage of the instant and powerful search engine.
 
-# Getting started
-
 First of all, you will need a Kubernetes cluster up and running. If you are not familiar with how Kuberentes works or need some help with this step, please check the [Kubernetes documentation](https://kubernetes.io/docs/home/).
 
-## Install kubectl
+## Install kubectl <!-- omit in toc -->
 
 `kubectl` is the most commonly used CLI to manage a Kubernetes cluster. The installation instructions are [available here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
-## Deploy MeiliSearch using manifests
+## Deploy MeiliSearch using manifests <!-- omit in toc -->
 
-### Install and run MeiliSearch
+### Install and run MeiliSearch <!-- omit in toc -->
 
 ```bash
 kubectl apply -f manifests/meilisearch.yaml
 ```
 
-### Uninstall MeiliSearch
+### Uninstall MeiliSearch <!-- omit in toc -->
 
 ```bash
 kubectl delete -f manifests/meilisearch.yaml
 ```
 
-## Deploy MeiliSearch using Helm
+## Deploy MeiliSearch using Helm <!-- omit in toc -->
 
 Helm works as a package manager to run pre-configured Kubernetes resources. Using our [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch) you will be able to deploy a MeiliSearch instance in you Kubernetes cluster, with several customizable configurations.
 
-### Install helm
+### Install helm <!-- omit in toc -->
 
 Helm CLI is a Command Line Interface which will automate chart management and installation on your Kubernetes cluster. To install Helm, follow the [Helm installation instructions](https://helm.sh/docs/intro/install/).
 
 The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch#parameters) section lists the parameters that can be configured during installation.
 
-### Install MeiliSearch chart
+### Install MeiliSearch chart <!-- omit in toc -->
 
 First, add the meilisearch chart repository  
 ```bash
@@ -70,7 +80,7 @@ Now install/upgrade the chart
 helm upgrade -i <your-service-name> meilisearch/meilisearch
 ```
 
-### Uninstalling the Chart
+### Uninstalling the Chart <!-- omit in toc -->
 
 To uninstall/delete the MeiliSearch` deployment:
 
