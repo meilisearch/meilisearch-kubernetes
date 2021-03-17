@@ -19,6 +19,10 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "meilisearch.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
     spec:
       serviceAccountName: {{ template "meilisearch.fullname" . }}
       {{- if .Values.image.pullSecret }}

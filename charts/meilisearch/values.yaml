@@ -25,6 +25,8 @@ environment:
   MEILI_NO_ANALYTICS: true
   MEILI_ENV: development
 
+podAnnotations: {}
+
 service:
   type: ClusterIP
   port: 7700
