@@ -117,9 +117,9 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration Tool](https://github.com/meilisearch/integration-guides/blob/main/guides/integration-tool-release.md).
 
-⚠️ Every PR that is merged to `main` introducing changes to the Helm Chart needs to modify the file `Chart.yaml`(charts/meilisearch/Chart.yaml), by increasing the version of the chart accordingly.
+⚠️ Every PR that is merged to `main` introducing changes to the Helm Chart needs to modify the file [`Chart.yaml`](charts/meilisearch/Chart.yaml), by increasing the version of the chart accordingly.
 
-Every PR that is merged to `main` triggers the automated release process, as specified at `.github/workflows/release-chart.yaml`. A GitHub Action will be triggered and publish a new release on the GitHub repository [releases](https://github.com/meilisearch/meilisearch-kubernetes/releases). This will enable users to start using the new version of the chart immediately after publishing.
+Every PR that is merged to `main` triggers the automated release process, as specified at [`.github/workflows/release-chart.yaml`](.github/workflows/release-chart.yaml). A GitHub Action will be triggered and publish a new release on the GitHub repository [releases](https://github.com/meilisearch/meilisearch-kubernetes/releases). This will enable users to start using the new version of the chart immediately after publishing.
 
 <hr>
 
