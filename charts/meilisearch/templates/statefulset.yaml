@@ -19,6 +19,10 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "meilisearch.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
     spec:
       serviceAccountName: {{ template "meilisearch.fullname" . }}
       {{- if .Values.image.pullSecret }}
@@ -27,7 +31,7 @@ spec:
       {{- end }}
       {{- if .Values.persistence.enabled }}
       volumes:
-        - name: data
+        - name: {{ .Values.persistence.volume.name }}
           persistentVolumeClaim:
             claimName: {{ include "meilisearch.fullname" . }}
       {{- end }}
@@ -37,15 +41,15 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.persistence.enabled }}
           volumeMounts:
-            - name: data
-              mountPath: /data.ms
+            - name: {{ .Values.persistence.volume.name }}
+              mountPath: {{ .Values.persistence.volume.mountPath }}
           {{- end }}
           envFrom:
           - configMapRef:
               name: {{ template "meilisearch.fullname" . }}-environment
           ports:
             - name: http
-              containerPort: 7700
+              containerPort: {{ .Values.container.containerPort }}
               protocol: TCP
           livenessProbe:
             httpGet:

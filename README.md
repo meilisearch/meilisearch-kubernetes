@@ -59,13 +59,15 @@ The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/main
 
 ### Install MeiliSearch chart
 
-Clone this repository and install the chart
-
+First, add the meilisearch chart repository  
 ```bash
-git clone https://github.com/meilisearch/meilisearch-kubernetes.git
-cd meilisearch-kubernetes
+helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
+```
+
+Now install/upgrade the chart  
+```bash
 # Replace <your-instance-name> with the name you would like to give to your service
-helm install <your-service-name> charts/meilisearch
+helm upgrade -i <your-service-name> meilisearch/meilisearch
 ```
 
 ### Uninstalling the Chart
