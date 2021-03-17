@@ -31,6 +31,9 @@ service:
   type: ClusterIP
   port: 7700
 
+container:
+  containerPort: 7700
+
 ingress:
   enabled: false
   annotations: {}
@@ -55,6 +58,9 @@ persistence:
   ##
   # storageClass: "-"
   size: 10Gi
+  volume:
+    name: data
+    mountPath: /data.ms
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
