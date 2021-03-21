@@ -30,3 +30,14 @@ Create chart name and version as used by the chart label.
 {{- define "meilisearch.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Checks for environment being set to "production" without a master key being set explicitly
+*/}}
+{{- define "isProductionWithoutMasterKey" -}}
+{{- if and (eq .Values.environment.MEILI_ENV "production") (not .Values.environment.MEILI_MASTER_KEY) -}}
+{{- "true" -}}
+{{- else -}}
+{{- "false" -}}
+{{- end -}}
+{{- end -}}
