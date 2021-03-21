@@ -25,6 +25,25 @@ jobs:
           command: lint
           config: ct.yaml
 
+  update_manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Generate helm template
+        run: helm template meilisearch charts/meilisearch > manifests/meilisearch.yaml
+
+      - name: Commit changes
+        if: ${{ git diff --quiet && git diff --cached --quiet }}
+        run: |
+          git add -A
+          git commit -m "Update helm template manifest"
+          git push -u origin ${{ github.head_ref }}
+
+
   helm-tests:
     runs-on: ubuntu-latest
     steps:
