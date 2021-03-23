@@ -25,6 +25,7 @@
 
 - [📖 Documentation](#-documentation)
 - [🚀 Getting Started](#-getting-started)
+- [🤖 Compatibility with MeiliSearch](#-compatibility-with-meilisearch)
 - [⚙️ Development Workflow and Contributing](#️-development-workflow-and-contributing)
 
 ## 📖 Documentation
@@ -88,6 +89,10 @@ To uninstall/delete the MeiliSearch` deployment:
 # Replace <your-instance-name> with the name of your deployed service
 helm uninstall <your-service-name>
 ```
+
+## 🤖 Compatibility with MeiliSearch
+
+This chart only guarantees the compatibility with the [version v0.19.0 of MeiliSearch](https://github.com/meilisearch/MeiliSearch/releases/tag/v0.19.0).
 
 ## ⚙️ Development Workflow and Contributing
 
