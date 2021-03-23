@@ -68,7 +68,7 @@ Each PR should pass the linter to be accepted.
 helm lint charts/meilisearch 
 ```
 
-Additionally, the GitHub CI will run a test to check if there are changes introduced to the charts. If changes were introduced, it will require you to update the Chart version 
+Additionally, the GitHub CI will run a test to check if there are changes introduced to the charts. If changes were introduced, it will require you to update the Chart version.
 
 ## Git Guidelines
 
