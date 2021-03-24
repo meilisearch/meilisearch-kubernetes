@@ -94,4 +94,4 @@ helm uninstall <your-service-name>
 
 The `environment` block allows to specify all the environment variables declared on [MeiliSearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
 
-For production deployment, the `environment.MEILI_MASTER_KEY` is required
+For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret. To get the value of this secret, you can read it with this command: `kubectl get secret meilisearch-master-key --template={{.data.MEILI_MASTER_KEY}} | base64 --decode`.
