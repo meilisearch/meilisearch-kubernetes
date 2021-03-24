@@ -47,6 +47,10 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ template "meilisearch.fullname" . }}-environment
+          {{- if eq (include "isProductionWithoutMasterKey" .) "true" }}
+          - secretRef:
+              name: {{ template "meilisearch.fullname" . }}-master-key
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.container.containerPort }}
