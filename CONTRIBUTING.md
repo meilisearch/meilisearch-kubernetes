@@ -115,7 +115,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ### How to Publish the Release <!-- omit in toc -->
 
-⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration Tool](https://github.com/meilisearch/integration-guides/blob/main/guides/integration-tool-release.md).
+⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/guides/integration-release.md).
 
 ⚠️ Every PR that is merged to `main` introducing changes to the Helm Chart needs to modify the file [`charts/meilisearch/Chart.yaml`](charts/meilisearch/Chart.yaml), by increasing the version of the chart accordingly.
 
