@@ -69,12 +69,12 @@ The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/main
 
 #### Install MeiliSearch chart <!-- omit in toc -->
 
-First, add the meilisearch chart repository  
+First, add the meilisearch chart repository
 ```bash
 helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
 ```
 
-Now install/upgrade the chart  
+Now install/upgrade the chart
 ```bash
 # Replace <your-instance-name> with the name you would like to give to your service
 helm upgrade -i <your-service-name> meilisearch/meilisearch
@@ -91,7 +91,7 @@ helm uninstall <your-service-name>
 
 ## 🤖 Compatibility with MeiliSearch
 
-This chart only guarantees the compatibility with the [version v0.19.0 of MeiliSearch](https://github.com/meilisearch/MeiliSearch/releases/tag/v0.19.0).
+This chart only guarantees the compatibility with the [version v0.21.0 of MeiliSearch](https://github.com/meilisearch/MeiliSearch/releases/tag/v0.21.0).
 
 ## ⚙️ Development Workflow and Contributing
 
