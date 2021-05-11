@@ -20,7 +20,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         id: lint
-        uses: helm/chart-testing-action@v1.0.0
+        uses: helm/chart-testing-action@v2.0.1
         with:
           command: lint
           config: ct.yaml
@@ -35,10 +35,10 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: Create kind cluster
-        uses: helm/kind-action@v1.0.0-alpha.3
+        uses: helm/kind-action@v1.1.0
 
       - name: Run chart-testing (install)
-        uses: helm/chart-testing-action@v1.0.0
+        uses: helm/chart-testing-action@v2.0.1
         with:
           command: install
           config: ct.yaml
