@@ -1,34 +1,12 @@
-name: Chart manifest
+name: Manifest
 on:
-  pull_request:
-    branches:
-      - main
   issue_comment:
     types: [created, edited]
 
 jobs:
-  check_chart_manifest_in_sync:
-    if: github.event_name == 'pull_request'
-    name: Check chart manifest is in sync
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Check helm template in sync
-        id: helm_template
-        run: |
-          helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
-          if git diff --quiet && git diff --quiet --cached; then 
-            echo "✅ Manifests are in sync"; 
-          else 
-            echo "❌ Manifest update required. Comment on your PR with '@meilisearch sync-manifest' to update the manifest";
-            exit 1
-          fi
-
   sync_chart_manifest_on_comment:
-    if: github.event_name == 'issue_comment' && contains(github.event.comment.body, '@meilisearch sync-manifest')
-    name: Sync chart manifest
+    if: contains(github.event.comment.body, '@meilisearch sync-manifest')
+    name: Sync chart manifest on comment
     runs-on: ubuntu-latest
     steps:
       # There isn't enough detail in the github.event on "issue_comment" events about the PR origin, so we need to fetch more
