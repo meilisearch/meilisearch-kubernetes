@@ -19,6 +19,6 @@ jobs:
           if git diff --quiet && git diff --quiet --cached; then 
             echo "✅ Manifests are in sync"; 
           else 
-            echo "❌ Manifest update required. Run "helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml" in the repository and push it;
+            echo "❌ Manifest update required. Run "helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml" in the repository and push it";
             exit 1
           fi
