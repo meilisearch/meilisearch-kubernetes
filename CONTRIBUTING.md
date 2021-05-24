@@ -68,6 +68,19 @@ Each PR should pass the linter to be accepted.
 helm lint charts/meilisearch 
 ```
 
+Each PR should also check if the generated file `manifests/meilisearch.yaml` is updated with the new modifications.
+You can generated the manifest with the command line:
+
+```bash
+helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
+```
+
+Or just by comment the PR after the test has failed with:
+
+```
+@meilisearch sync-manifest
+```
+
 Additionally, the GitHub CI will run a test to check if there are changes introduced to the charts. If changes were introduced, it will require you to update the Chart version.
 
 ## Git Guidelines
