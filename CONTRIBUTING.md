@@ -75,7 +75,7 @@ You can generated the manifest with the command line:
 helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
 ```
 
-Or just by comment the PR after the test has failed with:
+Or just by comment the PR:
 
 ```
 @meilisearch sync-manifest
