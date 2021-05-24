@@ -44,7 +44,7 @@ jobs:
           config: ct.yaml
 
   check-chart-manifest-in-sync:
-    name: Check in sync
+    name: check-chart-manifest-in-sync
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
