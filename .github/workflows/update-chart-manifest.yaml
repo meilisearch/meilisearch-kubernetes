@@ -4,7 +4,7 @@ on:
     types: [created, edited]
 
 jobs:
-  sync_chart_manifest_on_comment:
+  sync-chart-manifest-on-comment:
     if: contains(github.event.comment.body, '@meilisearch sync-manifest')
     name: Sync chart manifest on comment
     runs-on: ubuntu-latest
