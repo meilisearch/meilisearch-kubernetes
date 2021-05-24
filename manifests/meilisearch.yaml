@@ -76,14 +76,14 @@ spec:
             httpGet:
               path: /health
               port: http
-            periodSeconds: 10
-            initialDelaySeconds: 0
+            periodSeconds: 60
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /health
               port: http
-            periodSeconds: 10
-            initialDelaySeconds: 0
+            periodSeconds: 60
+            initialDelaySeconds: 60
           resources:
             {}
 ---
