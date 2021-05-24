@@ -42,3 +42,21 @@ jobs:
         with:
           command: install
           config: ct.yaml
+
+  check-chart-manifest-in-sync:
+    name: check-chart-manifest-in-sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Check helm template in sync
+        id: helm_template
+        run: |
+          helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
+          if git diff --quiet && git diff --quiet --cached; then 
+            echo "✅ Manifests are in sync"; 
+          else 
+            echo "❌ Manifest update required. Comment on your PR with '@meilisearch sync-manifest' to update the manifest";
+            exit 1
+          fi
