@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  check_chart_manifest_in_sync:
+  check-chart-manifest-in-sync:
     name: Check in sync
     runs-on: ubuntu-latest
     steps:
