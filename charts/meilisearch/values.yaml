@@ -28,7 +28,7 @@ environment:
   # If MEILI_ENV is set to "production" without setting MEILI_MASTER_KEY, this
   # chart will automatically create a secure MEILI_MASTER_KEY and push it as a
   # secret. Otherwise the below value of MEILI_MASTER_KEY will be used instead.
-  # MEILI_MASTER_KEY: 
+  # MEILI_MASTER_KEY:
 
 podAnnotations: {}
 
