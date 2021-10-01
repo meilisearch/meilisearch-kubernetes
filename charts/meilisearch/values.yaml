@@ -32,6 +32,8 @@ environment:
 
 podAnnotations: {}
 
+customLabels: {}
+
 service:
   type: ClusterIP
   port: 7700
