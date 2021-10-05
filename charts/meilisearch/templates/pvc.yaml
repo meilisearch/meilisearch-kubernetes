@@ -8,6 +8,9 @@ metadata:
     helm.sh/chart: {{ include "meilisearch.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- with .Values.customLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}
