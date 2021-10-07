@@ -7,6 +7,9 @@ metadata:
     helm.sh/chart: {{ include "meilisearch.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- with .Values.customLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   serviceName: {{ template "meilisearch.fullname" . }}
@@ -19,6 +22,9 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "meilisearch.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- with .Values.customLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
     {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
