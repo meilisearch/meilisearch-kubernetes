@@ -11,6 +11,10 @@ metadata:
     {{- with .Values.customLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
+{{- with .Values.persistence.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}

@@ -30,6 +30,10 @@ environment:
   # secret. Otherwise the below value of MEILI_MASTER_KEY will be used instead.
   # MEILI_MASTER_KEY:
 
+serviceAccount:
+  # Annotations to add to the service account
+  annotations: {}
+
 podAnnotations: {}
 
 customLabels: {}
@@ -37,6 +41,7 @@ customLabels: {}
 service:
   type: ClusterIP
   port: 7700
+  annotations: {}
 
 container:
   containerPort: 7700
@@ -65,6 +70,7 @@ persistence:
   ##
   # storageClass: "-"
   size: 10Gi
+  annotations: {}
   volume:
     name: data
     mountPath: /data.ms

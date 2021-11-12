@@ -58,6 +58,10 @@ helm uninstall <your-service-name>
 | | |
 | `image.pullPolicy`               | MeiliSearch image pull policy                                  | `IfNotPresent`
 | | |
+| `serviceAccount.annotations`     | Additional annotations for service account                     | `{}`
+| | |
+| `podAnnotations`                 | Annotations for the pods                                       | `{}`
+| | |
 | `ingress.enabled`                | Enable ingress controller resource                             | `false`
 | | |
 | `ingress.annotations`            | Ingress annotations                                            | `{}`
@@ -72,6 +76,8 @@ helm uninstall <your-service-name>
 | | |
 | `service.type`                   | Kubernetes Service type                                        | `7700`
 | | |
+| `service.annotations`            | Additional annotations for service account                     | `{}`
+| | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
 | | |
 | `persistence.accessMode`         | PVC Access Mode                                                | `ReadWriteOnce`
@@ -79,6 +85,8 @@ helm uninstall <your-service-name>
 | `persistence.storageClass`       | PVC Storage Class                                              | `-` (No storage class)
 | | |
 | `persistence.size`               | PVC Storage Request                                            | `10Gi`
+| | |
+| `persistence.annotations`        | Additional annotations for PVC                                 | `{}`
 | | |
 | `resources`                      | Resources allocation (Requests and Limits)                     | `{}`
 | | |
