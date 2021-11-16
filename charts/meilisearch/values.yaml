@@ -31,7 +31,6 @@ environment:
   # MEILI_MASTER_KEY:
 
 serviceAccount:
-  # Annotations to add to the service account
   annotations: {}
 
 podAnnotations: {}
