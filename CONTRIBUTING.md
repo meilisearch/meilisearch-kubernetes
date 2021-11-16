@@ -2,22 +2,11 @@
 
 First of all, thank you for contributing to MeiliSearch! The goal of this document is to provide everything you need to know in order to contribute to MeiliSearch and its different integrations.
 
-- [Hacktoberfest](#hacktoberfest)
 - [Assumptions](#assumptions)
 - [How to Contribute](#how-to-contribute)
 - [Development Workflow](#development-workflow)
 - [Git Guidelines](#git-guidelines)
 - [Release Process (for internal team only)](#release-process-for-internal-team-only)
-
-## Hacktoberfest
-
-It's [Hacktoberfest month](https://blog.meilisearch.com/contribute-hacktoberfest-2021/)! 🥳
-
-🚀 If your PR gets accepted it will count into your participation to Hacktoberfest!
-
-✅ To be accepted it has either to have been merged, approved or tagged with the `hacktoberfest-accepted` label.
-
-🧐 Don't forget to check the [quality standards](https://hacktoberfest.digitalocean.com/resources/qualitystandards)! Low-quality PRs might get marked as `spam` or `invalid`, and will not count toward your participation in Hacktoberfest.
 
 ## Assumptions
 
@@ -124,7 +113,7 @@ Some notes on GitHub PRs:
 
 - [Convert your PR as a draft](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/changing-the-stage-of-a-pull-request) if your changes are a work in progress: no one will review it until you pass your PR as ready for review.<br>
   The draft PR can be very useful if you want to show that you are working on something and make your work visible.
-- The branch related to the PR must be **up-to-date with `main`** before merging. Fortunately, this project [integrates a bot](https://github.com/meilisearch/integration-guides/blob/main/guides/bors.md) to automatically enforce this requirement without the PR author having to do it manually.
+- The branch related to the PR must be **up-to-date with `main`** before merging. Fortunately, this project [integrates a bot](https://github.com/meilisearch/integration-guides/blob/main/resources/bors.md) to automatically enforce this requirement without the PR author having to do it manually.
 - All PRs must be reviewed and approved by at least one maintainer.
 - The PR title should be accurate and descriptive of the changes. The title of the PR will be indeed automatically added to the next [release changelogs](https://github.com/meilisearch/meilisearch-kubernetes/releases/).
 
@@ -135,11 +124,11 @@ MeiliSearch tools follow the [Semantic Versioning Convention](https://semver.org
 ### Automation to Rebase and Merge the PRs <!-- omit in toc -->
 
 This project integrates a bot that helps us manage pull requests merging.<br>
-_[Read more about this](https://github.com/meilisearch/integration-guides/blob/main/guides/bors.md)._
+_[Read more about this](https://github.com/meilisearch/integration-guides/blob/main/resources/bors.md)._
 
 ### How to Publish the Release <!-- omit in toc -->
 
-⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/guides/integration-release.md).
+⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md).
 
 ⚠️ Every PR that is merged to `main` introducing changes to the Helm Chart needs to modify the file [`charts/meilisearch/Chart.yaml`](charts/meilisearch/Chart.yaml), by increasing the version of the chart accordingly.
 
