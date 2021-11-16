@@ -76,7 +76,7 @@ helm uninstall <your-service-name>
 | | |
 | `service.type`                   | Kubernetes Service type                                        | `7700`
 | | |
-| `service.annotations`            | Additional annotations for service account                     | `{}`
+| `service.annotations`            | Additional annotations for service                     | `{}`
 | | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
 | | |
