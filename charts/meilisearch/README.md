@@ -60,8 +60,6 @@ helm uninstall <your-service-name>
 | | |
 | `serviceAccount.annotations`     | Additional annotations for service account                     | `{}`
 | | |
-| `podAnnotations`                 | Annotations for the pods                                       | `{}`
-| | |
 | `ingress.enabled`                | Enable ingress controller resource                             | `false`
 | | |
 | `ingress.annotations`            | Ingress annotations                                            | `{}`
@@ -76,7 +74,7 @@ helm uninstall <your-service-name>
 | | |
 | `service.type`                   | Kubernetes Service type                                        | `7700`
 | | |
-| `service.annotations`            | Additional annotations for service                     | `{}`
+| `service.annotations`            | Additional annotations for service                             | `{}`
 | | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
 | | |
