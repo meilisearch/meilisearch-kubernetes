@@ -10,6 +10,10 @@ metadata:
     {{- with .Values.customLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{ toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -17,6 +21,11 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+      {{- if eq "NodePort" .Values.service.type }}
+      {{- if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
+      {{- end }}
   selector:
     app.kubernetes.io/name: {{ include "meilisearch.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
