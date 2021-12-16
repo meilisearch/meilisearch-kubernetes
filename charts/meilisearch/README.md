@@ -31,7 +31,7 @@ This command deploys MeiliSearch on your Kubernetes cluster using the default co
 
 ## Uninstalling the Chart
 
-To uninstall/delete the MeiliSearch deployment:
+To uninstall/delete the `MeiliSearch` deployment:
 
 ```bash
 # Replace <your-instance-name> with the name of your deployed service
