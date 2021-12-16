@@ -35,9 +35,17 @@ Create chart name and version as used by the chart label.
 Checks for environment being set to "production" without a master key being set explicitly
 */}}
 {{- define "isProductionWithoutMasterKey" -}}
-{{- if and (eq .Values.environment.MEILI_ENV "production") (not .Values.environment.MEILI_MASTER_KEY) -}}
+{{- if and (eq .Values.environment.MEILI_ENV "production") (not .Values.environment.MEILI_MASTER_KEY) (not .Values.auth.existingMasterKeySecret) -}}
 {{- "true" -}}
 {{- else -}}
 {{- "false" -}}
 {{- end -}}
+{{- end -}}
+
+{{- define "secretMasterKeyName" -}}
+    {{- if .Values.auth.existingMasterKeySecret -}}
+        {{- printf "%s" (tpl .Values.auth.existingMasterKeySecret $) -}}
+    {{- else -}}
+        {{- printf "%s-master-key" (include "meilisearch.fullname" .) -}}
+    {{- end -}}
 {{- end -}}
