@@ -16,6 +16,7 @@ image:
   repository: getmeili/meilisearch
   tag: v0.24.0
   pullPolicy: IfNotPresent
+  pullSecret:
 
 nameOverride: ""
 fullnameOverride: ""
