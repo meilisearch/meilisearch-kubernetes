@@ -31,7 +31,7 @@ This command deploys MeiliSearch on your Kubernetes cluster using the default co
 
 ## Uninstalling the Chart
 
-To uninstall/delete the MeiliSearch` deployment:
+To uninstall/delete the `MeiliSearch` deployment:
 
 ```bash
 # Replace <your-instance-name> with the name of your deployed service
@@ -52,12 +52,16 @@ helm uninstall <your-service-name>
 | | |
 | `environment.MEILI_NO_ANALYTICS` | Deactivates analytics                                          | `true`
 | | |
+| `auth.existingMasterKeySecret`   | Uses an existing secret that has the MEILI_MASTER_KEY set       | `nil`
+| | |
 | `image.repository`               | MeiliSearch image name                                         | `getmeili/meilisearch`
 | | |
 | `image.tag`                      | MeiliSearch image tag                                          | `{TAG_NAME}`
 | | |
 | `image.pullPolicy`               | MeiliSearch image pull policy                                  | `IfNotPresent`
 | | |
+| `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
+| | | 
 | `serviceAccount.annotations`     | Additional annotations for service account                     | `{}`
 | | |
 | `ingress.enabled`                | Enable ingress controller resource                             | `false`
@@ -100,4 +104,4 @@ helm uninstall <your-service-name>
 
 The `environment` block allows to specify all the environment variables declared on [MeiliSearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
 
-For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret. To get the value of this secret, you can read it with this command: `kubectl get secret meilisearch-master-key --template={{.data.MEILI_MASTER_KEY}} | base64 --decode`.
+For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret. To get the value of this secret, you can read it with this command: `kubectl get secret meilisearch-master-key --template={{.data.MEILI_MASTER_KEY}} | base64 --decode`. You can also use `auth.existingMasterKeySecret` to use an existing secret that has the key `MEILI_MASTER_KEY`

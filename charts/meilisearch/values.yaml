@@ -16,6 +16,7 @@ image:
   repository: getmeili/meilisearch
   tag: v0.25.0
   pullPolicy: IfNotPresent
+  pullSecret:
 
 nameOverride: ""
 fullnameOverride: ""
@@ -29,6 +30,9 @@ environment:
   # chart will automatically create a secure MEILI_MASTER_KEY and push it as a
   # secret. Otherwise the below value of MEILI_MASTER_KEY will be used instead.
   # MEILI_MASTER_KEY:
+auth:
+  # Use an existing Kubernetes secret for the MEILI_MASTER_KEY
+  existingMasterKeySecret: ""
 
 serviceAccount:
   annotations: {}
