@@ -1,8 +1,8 @@
 apiVersion: v1
-appVersion: "v0.25.0"
+appVersion: "v0.25.2"
 description: A Helm chart for the Meilisearch search engine
 name: meilisearch
-version: 0.1.24
+version: 0.1.25
 icon: https://res.cloudinary.com/meilisearch/image/upload/v1597822872/Logo/logo_img.svg
 home: https://github.com/meilisearch/meilisearch-kubernetes/charts
 maintainers:
