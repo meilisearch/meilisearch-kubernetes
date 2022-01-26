@@ -1,7 +1,13 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "meilisearch.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1
+{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}
@@ -13,10 +19,10 @@ metadata:
     {{- with .Values.customLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
-{{- with .Values.ingress.annotations }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-{{ toYaml . | indent 4 }}
-{{- end }}
+  {{- . | toYaml | nindent 4 }}
+  {{- end }}
 spec:
   {{- if .Values.ingress.tls }}
   tls:
@@ -30,12 +36,22 @@ spec:
   {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
-    - host: {{ . | quote }}
-      http:
-        paths:
-          - path: {{ $ingressPath }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: http
+  - host: {{ . | quote }}
+    http:
+      paths:
+        - path: {{ $ingressPath }}
+          {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+          pathType: Prefix
+          {{- end }}
+          backend:
+            {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+            service:
+              name: {{ $fullName }}
+              port:
+                number: 80
+            {{- else }}
+            serviceName: {{ $fullName }}
+            servicePort: http
+            {{- end }}
   {{- end }}
 {{- end }}
