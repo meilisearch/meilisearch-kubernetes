@@ -83,7 +83,7 @@ helm upgrade -i <your-service-name> meilisearch/meilisearch
 
 #### Uninstalling the Chart <!-- omit in toc -->
 
-To uninstall/delete the `Meilisearch` deployment:
+To uninstall/delete the Meilisearch deployment:
 
 ```bash
 # Replace <your-instance-name> with the name of your deployed service
