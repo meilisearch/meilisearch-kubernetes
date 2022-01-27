@@ -2,7 +2,7 @@
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
-MeiliSearch provides a customizable Helm chart, ready to deploy a [Meilisearch](https://github.com/meilisearch/MeiliSearch) instance on your Kubernetes cluster.
+Meilisearch provides a customizable Helm chart, ready to deploy a [Meilisearch](https://github.com/meilisearch/meilisearch) instance on your Kubernetes cluster.
 
 # Getting started
 
@@ -16,7 +16,7 @@ First of all, you will need a Kubernetes cluster up and running. If you are not 
 
 Helm CLI is a Command Line Interface which will automate chart management and installation on your Kubernetes cluster. To install Helm, follow the [Helm installation instructions](https://helm.sh/docs/intro/install/)
 
-### Install MeiliSearch chart
+### Install Meilisearch chart
 
 Clone this repository and install the chart
 
@@ -27,11 +27,11 @@ cd meilisearch-kubernetes
 helm install <your-service-name> charts/meilisearch
 ```
 
-This command deploys MeiliSearch on your Kubernetes cluster using the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+This command deploys Meilisearch on your Kubernetes cluster using the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `MeiliSearch` deployment:
+To uninstall/delete the `Meilisearch` deployment:
 
 ```bash
 # Replace <your-instance-name> with the name of your deployed service
@@ -46,7 +46,7 @@ helm uninstall <your-service-name>
 | | |
 | `fullnameOverride`               | String to fully override meilisearch.fullname                  | `nil`
 | | |
-| `replicaCount`                   | Number of MeiliSearch pods to run                              | `1`
+| `replicaCount`                   | Number of Meilisearch pods to run                              | `1`
 | | |
 | `environment.MEILI_ENV`          | Sets the environment. Either **production** or **development** | `development`
 | | |
@@ -54,11 +54,11 @@ helm uninstall <your-service-name>
 | | |
 | `auth.existingMasterKeySecret`   | Uses an existing secret that has the MEILI_MASTER_KEY set       | `nil`
 | | |
-| `image.repository`               | MeiliSearch image name                                         | `getmeili/meilisearch`
+| `image.repository`               | Meilisearch image name                                         | `getmeili/meilisearch`
 | | |
-| `image.tag`                      | MeiliSearch image tag                                          | `{TAG_NAME}`
+| `image.tag`                      | Meilisearch image tag                                          | `{TAG_NAME}`
 | | |
-| `image.pullPolicy`               | MeiliSearch image pull policy                                  | `IfNotPresent`
+| `image.pullPolicy`               | Meilisearch image pull policy                                  | `IfNotPresent`
 | | |
 | `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
 | | | 
@@ -102,6 +102,6 @@ helm uninstall <your-service-name>
 
 ### Environment
 
-The `environment` block allows to specify all the environment variables declared on [MeiliSearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
+The `environment` block allows to specify all the environment variables declared on [Meilisearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
 
 For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret. To get the value of this secret, you can read it with this command: `kubectl get secret meilisearch-master-key --template={{.data.MEILI_MASTER_KEY}} | base64 --decode`. You can also use `auth.existingMasterKeySecret` to use an existing secret that has the key `MEILI_MASTER_KEY`

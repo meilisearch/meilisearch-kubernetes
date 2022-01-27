@@ -5,7 +5,7 @@
 <h1 align="center">Meilisearch Kubernetes</h1>
 
 <h4 align="center">
-  <a href="https://github.com/meilisearch/Meilisearch">Meilisearch</a> |
+  <a href="https://github.com/meilisearch/meilisearch">Meilisearch</a> |
   <a href="https://docs.meilisearch.com">Documentation</a> |
   <a href="https://slack.meilisearch.com">Slack</a> |
   <a href="https://www.meilisearch.com">Website</a> |
@@ -70,7 +70,7 @@ The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/main
 
 #### Install Meilisearch chart <!-- omit in toc -->
 
-First, add the meilisearch chart repository
+First, add the Meilisearch chart repository
 ```bash
 helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
 ```
@@ -83,7 +83,7 @@ helm upgrade -i <your-service-name> meilisearch/meilisearch
 
 #### Uninstalling the Chart <!-- omit in toc -->
 
-To uninstall/delete the Meilisearch` deployment:
+To uninstall/delete the `Meilisearch` deployment:
 
 ```bash
 # Replace <your-instance-name> with the name of your deployed service
