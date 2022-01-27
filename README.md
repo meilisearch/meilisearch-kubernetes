@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/meilisearch_k8s.svg" alt="Instant-MeiliSearch" width="200" height="200" />
+  <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/meilisearch_k8s.svg" alt="Meilisearch Kubernetes" width="200" height="200" />
 </p>
 
-<h1 align="center">MeiliSearch Kubernetes</h1>
+<h1 align="center">Meilisearch Kubernetes</h1>
 
 <h4 align="center">
-  <a href="https://github.com/meilisearch/MeiliSearch">MeiliSearch</a> |
+  <a href="https://github.com/meilisearch/meilisearch">Meilisearch</a> |
   <a href="https://docs.meilisearch.com">Documentation</a> |
   <a href="https://slack.meilisearch.com">Slack</a> |
   <a href="https://www.meilisearch.com">Website</a> |
@@ -18,15 +18,15 @@
   <a href="https://app.bors.tech/repositories/29795"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
 </p>
 
-<p align="center">The MeiliSearch tool for Kubernetes ⚓️</p>
+<p align="center">The Meilisearch tool for Kubernetes ⚓️</p>
 
-**MeiliSearch** is an open-source search engine. [Discover what MeiliSearch is!](https://github.com/meilisearch/MeiliSearch)
+**Meilisearch** is an open-source search engine. [Discover what Meilisearch is!](https://github.com/meilisearch/meilisearch)
 
 ## Table of Contents <!-- omit in toc -->
 
 - [📖 Documentation](#-documentation)
 - [🚀 Getting Started](#-getting-started)
-- [🤖 Compatibility with MeiliSearch](#-compatibility-with-meilisearch)
+- [🤖 Compatibility with Meilisearch](#-compatibility-with-meilisearch)
 - [⚙️ Development Workflow and Contributing](#️-development-workflow-and-contributing)
 
 ## 📖 Documentation
@@ -36,7 +36,7 @@ See our [Documentation](https://docs.meilisearch.com/learn/tutorials/getting_sta
 ## 🚀 Getting Started
 
 
-Kubernetes (K8s), is an open-source system for automating deployment, scaling, and management of containerized applications. You can run a MeiliSearch instance inside your Kubernetes cluster, either if you want to expose it to the outside world or just let some other applications use it inside your cluster and take advantage of the instant and powerful search engine.
+Kubernetes (K8s), is an open-source system for automating deployment, scaling, and management of containerized applications. You can run a Meilisearch instance inside your Kubernetes cluster, either if you want to expose it to the outside world or just let some other applications use it inside your cluster and take advantage of the instant and powerful search engine.
 
 First of all, you will need a Kubernetes cluster up and running. If you are not familiar with how Kuberentes works or need some help with this step, please check the [Kubernetes documentation](https://kubernetes.io/docs/home/).
 
@@ -44,23 +44,23 @@ First of all, you will need a Kubernetes cluster up and running. If you are not 
 
 `kubectl` is the most commonly used CLI to manage a Kubernetes cluster. The installation instructions are [available here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
-### Deploy MeiliSearch using manifests <!-- omit in toc -->
+### Deploy Meilisearch using manifests <!-- omit in toc -->
 
-#### Install and run MeiliSearch <!-- omit in toc -->
+#### Install and run Meilisearch <!-- omit in toc -->
 
 ```bash
 kubectl apply -f manifests/meilisearch.yaml
 ```
 
-#### Uninstall MeiliSearch <!-- omit in toc -->
+#### Uninstall Meilisearch <!-- omit in toc -->
 
 ```bash
 kubectl delete -f manifests/meilisearch.yaml
 ```
 
-### Deploy MeiliSearch using Helm <!-- omit in toc -->
+### Deploy Meilisearch using Helm <!-- omit in toc -->
 
-Helm works as a package manager to run pre-configured Kubernetes resources. Using our [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch) you will be able to deploy a MeiliSearch instance in you Kubernetes cluster, with several customizable configurations.
+Helm works as a package manager to run pre-configured Kubernetes resources. Using our [Helm chart](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch) you will be able to deploy a Meilisearch instance in you Kubernetes cluster, with several customizable configurations.
 
 #### Install helm <!-- omit in toc -->
 
@@ -68,9 +68,9 @@ Helm CLI is a Command Line Interface which will automate chart management and in
 
 The [Parameters](https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch#parameters) section lists the parameters that can be configured during installation.
 
-#### Install MeiliSearch chart <!-- omit in toc -->
+#### Install Meilisearch chart <!-- omit in toc -->
 
-First, add the meilisearch chart repository
+First, add the Meilisearch chart repository
 ```bash
 helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
 ```
@@ -83,16 +83,16 @@ helm upgrade -i <your-service-name> meilisearch/meilisearch
 
 #### Uninstalling the Chart <!-- omit in toc -->
 
-To uninstall/delete the MeiliSearch` deployment:
+To uninstall/delete the Meilisearch deployment:
 
 ```bash
 # Replace <your-instance-name> with the name of your deployed service
 helm uninstall <your-service-name>
 ```
 
-## 🤖 Compatibility with MeiliSearch
+## 🤖 Compatibility with Meilisearch
 
-This chart only guarantees the compatibility with the [version v0.25.0 of MeiliSearch](https://github.com/meilisearch/MeiliSearch/releases/tag/v0.25.0).
+This chart only guarantees the compatibility with the [version v0.25.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v0.25.0).
 
 ## ⚙️ Development Workflow and Contributing
 
@@ -102,4 +102,4 @@ If you want to know more about the development workflow or want to contribute, p
 
 <hr>
 
-**MeiliSearch** provides and maintains many **SDKs and Integration tools** like this one. We want to provide everyone with an **amazing search experience for any kind of project**. If you want to contribute, make suggestions, or just know what's going on right now, visit us in the [integration-guides](https://github.com/meilisearch/integration-guides) repository.
+**Meilisearch** provides and maintains many **SDKs and Integration tools** like this one. We want to provide everyone with an **amazing search experience for any kind of project**. If you want to contribute, make suggestions, or just know what's going on right now, visit us in the [integration-guides](https://github.com/meilisearch/integration-guides) repository.
