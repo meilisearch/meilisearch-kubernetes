@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/meilisearch_k8s.svg" alt="Instant-Meilisearch" width="200" height="200" />
+  <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/meilisearch_k8s.svg" alt="Meilisearch Kubernetes" width="200" height="200" />
 </p>
 
 <h1 align="center">Meilisearch Kubernetes</h1>
