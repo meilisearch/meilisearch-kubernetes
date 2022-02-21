@@ -63,7 +63,7 @@ spec:
       serviceAccountName: meilisearch
       containers:
         - name: meilisearch
-          image: "getmeili/meilisearch:v0.25.2"
+          image: "getmeili/meilisearch:test-docker-v0.26.0"
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:

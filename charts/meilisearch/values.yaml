@@ -14,7 +14,7 @@ livenessProbe:
 
 image:
   repository: getmeili/meilisearch
-  tag: v0.25.2
+  tag: test-docker-v0.26.0
   pullPolicy: IfNotPresent
   pullSecret:
 
@@ -76,7 +76,7 @@ persistence:
   annotations: {}
   volume:
     name: data
-    mountPath: /data.ms
+    mountPath: /data
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
