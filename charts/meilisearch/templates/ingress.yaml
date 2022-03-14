@@ -48,7 +48,7 @@ spec:
             service:
               name: {{ $fullName }}
               port:
-                number: 80
+                number: {{ .Values.service.port }}
             {{- else }}
             serviceName: {{ $fullName }}
             servicePort: http
