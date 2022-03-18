@@ -74,9 +74,9 @@ helm uninstall <your-service-name>
 | | |
 | `ingress.tls`                    | TLS specification                                              | `[]`
 | | |
-| `service.port`                   | Service HTTP port                                              | `ClusterIP`
+| `service.port`                   | Service HTTP port                                              | `7700`
 | | |
-| `service.type`                   | Kubernetes Service type                                        | `7700`
+| `service.type`                   | Kubernetes Service type                                        | `ClusterIP`
 | | |
 | `service.annotations`            | Additional annotations for service                             | `{}`
 | | |
