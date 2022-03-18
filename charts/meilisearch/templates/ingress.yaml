@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "meilisearch.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
+{{- $svcPort := .Values.service.port -}}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -48,7 +49,7 @@ spec:
             service:
               name: {{ $fullName }}
               port:
-                number: {{ .Values.service.port }}
+                number: {{ $svcPort }}
             {{- else }}
             serviceName: {{ $fullName }}
             servicePort: http
