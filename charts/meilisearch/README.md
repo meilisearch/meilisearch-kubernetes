@@ -61,9 +61,13 @@ helm uninstall <your-service-name>
 | `image.pullPolicy`               | Meilisearch image pull policy                                  | `IfNotPresent`
 | | |
 | `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
-| | | 
-| `serviceAccount.annotations`     | Additional annotations for service account                     | `{}`
-| | |
+|                                  |                                                                | 
+| `serviceAccount.create`          | Create a service account                                       | `true`
+|                                  |                                                                |
+| `serviceAccount.annotations`     | Additional annotations for created service account             | `{}`
+|                                  |                                                                |
+| `serviceAccount.name`            | Custom service account name, if not created by this chart      | ''
+|                                  |                                                                |
 | `ingress.enabled`                | Enable ingress controller resource                             | `false`
 | | |
 | `ingress.annotations`            | Ingress annotations                                            | `{}`
