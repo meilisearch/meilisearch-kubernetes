@@ -62,7 +62,7 @@ helm uninstall <your-service-name>
 | | |
 | `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
 |                                  |                                                                | 
-| `serviceAccount.create`          | Create a service account                                       | `true`
+| `serviceAccount.create`          | Should this chart create a service account                     | `true`
 |                                  |                                                                |
 | `serviceAccount.annotations`     | Additional annotations for created service account             | `{}`
 |                                  |                                                                |
