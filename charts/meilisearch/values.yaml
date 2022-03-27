@@ -35,6 +35,11 @@ auth:
   existingMasterKeySecret: ""
 
 serviceAccount:
+  # You can use a specific pre-created service account instead of
+  # the one created by this chart.
+  # Set create to false to prevent creating a service account and use your own.
+  create: true
+  name: ''
   annotations: {}
 
 podAnnotations: {}
