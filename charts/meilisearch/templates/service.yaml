@@ -15,7 +15,13 @@ metadata:
     {{ toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  {{- if .Values.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{.Values.service.externalTrafficPolicy}}
+  {{- end }}
   type: {{ .Values.service.type }}
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{.Values.service.loadBalancerIP}}
+  {{- end }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: http
