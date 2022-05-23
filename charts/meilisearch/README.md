@@ -82,6 +82,10 @@ helm uninstall <your-service-name>
 | | |
 | `service.type`                   | Kubernetes Service type                                        | `ClusterIP`
 | | |
+| `service.externalTrafficPolicy`  | Service external traffic policy                                | `-` (No external traffic policy)
+| | |
+| `service.loadBalancerIP`         | Service load balancer IP                                       | `-` (No load balancer IP)
+| | |
 | `service.annotations`            | Additional annotations for service                             | `{}`
 | | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
