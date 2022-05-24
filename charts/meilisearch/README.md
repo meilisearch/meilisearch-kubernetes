@@ -100,6 +100,8 @@ helm uninstall <your-service-name>
 | | |
 | `resources`                      | Resources allocation (Requests and Limits)                     | `{}`
 | | |
+| `command`                        | Pod command                                                    | `[]`
+| | |
 | `tolerations`                    | Tolerations for pod assignment                                 | `[]`
 | | |
 | `nodeSelector`                   | Node labels for pod assignment                                 | `{}`
