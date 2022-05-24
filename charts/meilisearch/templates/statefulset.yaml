@@ -57,6 +57,10 @@ spec:
           - secretRef:
               name: {{ template "secretMasterKeyName" . }}
           {{- end }}
+          {{- if ne (len .Values.command) 0 }}
+          command:
+{{ toYaml .Values.command | indent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.container.containerPort }}
