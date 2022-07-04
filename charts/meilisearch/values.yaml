@@ -82,7 +82,7 @@ persistence:
   annotations: {}
   volume:
     name: data
-    mountPath: /data.ms
+    mountPath: /meili_data
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
