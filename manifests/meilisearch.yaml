@@ -7,6 +7,9 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/version: "v0.28.0"
+    app.kubernetes.io/component: search-engine
+    app.kubernetes.io/part-of: meilisearch
 ---
 # Source: meilisearch/templates/configmap.yaml
 apiVersion: v1
@@ -16,6 +19,9 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/version: "v0.28.0"
+    app.kubernetes.io/component: search-engine
+    app.kubernetes.io/part-of: meilisearch
 data:
   MEILI_ENV: "development"
   MEILI_NO_ANALYTICS: "true"
@@ -28,6 +34,9 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/version: "v0.28.0"
+    app.kubernetes.io/component: search-engine
+    app.kubernetes.io/part-of: meilisearch
 spec:
   type: ClusterIP
   ports:
@@ -47,6 +56,9 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/version: "v0.28.0"
+    app.kubernetes.io/component: search-engine
+    app.kubernetes.io/part-of: meilisearch
 spec:
   replicas: 1
   serviceName: meilisearch
@@ -59,6 +71,9 @@ spec:
       labels:
         app.kubernetes.io/name: meilisearch
         app.kubernetes.io/instance: meilisearch
+        app.kubernetes.io/version: "v0.28.0"
+        app.kubernetes.io/component: search-engine
+        app.kubernetes.io/part-of: meilisearch
     spec:
       serviceAccountName: meilisearch
       containers:
