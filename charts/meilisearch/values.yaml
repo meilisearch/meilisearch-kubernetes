@@ -44,6 +44,7 @@ serviceAccount:
 
 podAnnotations: {}
 
+# -- Additional labels to add to all resources
 customLabels: {}
 
 service:

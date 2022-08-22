@@ -31,6 +31,26 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "meilisearch.labels" -}}
+helm.sh/chart: {{ include "meilisearch.chart" . }}
+{{ include "meilisearch.selectorLabels" . }}
+{{- if or .Chart.AppVersion .Values.image.tag }}
+app.kubernetes.io/version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/component: search-engine
+app.kubernetes.io/part-of: {{ template "meilisearch.name" . }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels }}
+{{- end }}
+{{- end -}}
+
+
+{{- define "meilisearch.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "meilisearch.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
 {{/*
 Checks for environment being set to "production" without a master key being set explicitly
 */}}
