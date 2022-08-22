@@ -3,28 +3,17 @@ kind: StatefulSet
 metadata:
   name: {{ include "meilisearch.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "meilisearch.name" . }}
-    helm.sh/chart: {{ include "meilisearch.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    {{- with .Values.customLabels }}
-      {{- toYaml . | nindent 4 }}
-    {{- end }}
+    {{- include "meilisearch.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   serviceName: {{ template "meilisearch.fullname" . }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "meilisearch.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "meilisearch.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "meilisearch.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        {{- with .Values.customLabels }}
-          {{- toYaml . | nindent 8 }}
-        {{- end }}
+        {{- include "meilisearch.labels" . | nindent 8 }}
     {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}

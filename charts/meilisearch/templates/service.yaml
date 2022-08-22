@@ -3,13 +3,7 @@ kind: Service
 metadata:
   name: {{ include "meilisearch.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "meilisearch.name" . }}
-    helm.sh/chart: {{ include "meilisearch.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    {{- with .Values.customLabels }}
-      {{- toYaml . | nindent 4 }}
-    {{- end }}
+    {{- include "meilisearch.labels" . | nindent 4 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{ toYaml . | nindent 4 }}
@@ -33,5 +27,4 @@ spec:
       {{- end }}
       {{- end }}
   selector:
-    app.kubernetes.io/name: {{ include "meilisearch.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "meilisearch.selectorLabels" . | nindent 4 }}
