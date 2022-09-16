@@ -14,7 +14,7 @@ livenessProbe:
 
 image:
   repository: getmeili/meilisearch
-  tag: v0.28.0
+  tag: v0.28.1
   pullPolicy: IfNotPresent
   pullSecret:
 
