@@ -61,7 +61,7 @@ helm uninstall <your-service-name>
 | `image.pullPolicy`               | Meilisearch image pull policy                                  | `IfNotPresent`
 | | |
 | `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
-|                                  |                                                                | 
+|                                  |                                                                |
 | `serviceAccount.create`          | Should this chart create a service account                     | `true`
 |                                  |                                                                |
 | `serviceAccount.annotations`     | Additional annotations for created service account             | `{}`
@@ -101,6 +101,10 @@ helm uninstall <your-service-name>
 | `resources`                      | Resources allocation (Requests and Limits)                     | `{}`
 | | |
 | `command`                        | Pod command                                                    | `[]`
+| | |
+| `volumes`                        | Additional volumes for pod                                     | `[]`
+| | |
+| `volumeMounts`                   | Additional volumes to mount on pod                             | `[]`
 | | |
 | `tolerations`                    | Tolerations for pod assignment                                 | `[]`
 | | |

@@ -97,6 +97,10 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
+volumes: []
+
+volumeMounts: []
+
 nodeSelector: {}
 
 tolerations: []
