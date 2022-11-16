@@ -54,6 +54,8 @@ helm uninstall <your-service-name>
 | | |
 | `auth.existingMasterKeySecret`   | Uses an existing secret that has the MEILI_MASTER_KEY set       | `nil`
 | | |
+| `envFrom`                        | Additional environment variables from ConfigMap or secrets      | `[]`
+| | |
 | `image.repository`               | Meilisearch image name                                         | `getmeili/meilisearch`
 | | |
 | `image.tag`                      | Meilisearch image tag                                          | `{TAG_NAME}`

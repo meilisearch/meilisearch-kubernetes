@@ -56,6 +56,9 @@ spec:
           - secretRef:
               name: {{ template "secretMasterKeyName" . }}
           {{- end }}
+          {{- if .Values.envFrom }}
+{{ toYaml .Values.envFrom | indent 10 }}
+          {{- end }}
           {{- if ne (len .Values.command) 0 }}
           command:
 {{ toYaml .Values.command | indent 12 }}
