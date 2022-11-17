@@ -34,6 +34,8 @@ auth:
   # Use an existing Kubernetes secret for the MEILI_MASTER_KEY
   existingMasterKeySecret: ""
 
+envFrom: []
+
 serviceAccount:
   # You can use a specific pre-created service account instead of
   # the one created by this chart.
@@ -96,6 +98,10 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
+
+volumes: []
+
+volumeMounts: []
 
 nodeSelector: {}
 
