@@ -29,9 +29,7 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: {{ .Values.persistence.volume.name }}
           persistentVolumeClaim:
-            claimName: {{ include "meilisearch.fullname" . }}
-            claimName: 
-            {{ if .Values.persistence.persistentVolume.existingClaim }}{{ .Values.persistence.persistentVolume.existingClaim }}{{- else }}{{ include "meilisearch.fullname" . }}{{- end }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "meilisearch.fullname" . }}{{- end }}
         {{- end }}
         {{- if .Values.volumes }}
 {{ toYaml .Values.volumes | indent 8 }}
