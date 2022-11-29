@@ -54,6 +54,8 @@ helm uninstall <your-service-name>
 | | |
 | `auth.existingMasterKeySecret`   | Uses an existing secret that has the MEILI_MASTER_KEY set       | `nil`
 | | |
+| `envFrom`                        | Additional environment variables from ConfigMap or secrets      | `[]`
+| | |
 | `image.repository`               | Meilisearch image name                                         | `getmeili/meilisearch`
 | | |
 | `image.tag`                      | Meilisearch image tag                                          | `{TAG_NAME}`
@@ -61,7 +63,7 @@ helm uninstall <your-service-name>
 | `image.pullPolicy`               | Meilisearch image pull policy                                  | `IfNotPresent`
 | | |
 | `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
-|                                  |                                                                | 
+|                                  |                                                                |
 | `serviceAccount.create`          | Should this chart create a service account                     | `true`
 |                                  |                                                                |
 | `serviceAccount.annotations`     | Additional annotations for created service account             | `{}`
@@ -101,6 +103,10 @@ helm uninstall <your-service-name>
 | `resources`                      | Resources allocation (Requests and Limits)                     | `{}`
 | | |
 | `command`                        | Pod command                                                    | `[]`
+| | |
+| `volumes`                        | Additional volumes for pod                                     | `[]`
+| | |
+| `volumeMounts`                   | Additional volumes to mount on pod                             | `[]`
 | | |
 | `tolerations`                    | Tolerations for pod assignment                                 | `[]`
 | | |
