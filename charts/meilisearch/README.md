@@ -92,6 +92,8 @@ helm uninstall <your-service-name>
 | | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
 | | |
+| `persistence.existingClaim`      | Existing PVC                                                   | `false`
+| | |
 | `persistence.accessMode`         | PVC Access Mode                                                | `ReadWriteOnce`
 | | |
 | `persistence.storageClass`       | PVC Storage Class                                              | `-` (No storage class)
