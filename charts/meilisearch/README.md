@@ -110,6 +110,8 @@ helm uninstall <your-service-name>
 | | |
 | `volumeMounts`                   | Additional volumes to mount on pod                             | `[]`
 | | |
+| `containers`                     | Additional containers for pod                                  | `[]`
+| | |
 | `tolerations`                    | Tolerations for pod assignment                                 | `[]`
 | | |
 | `nodeSelector`                   | Node labels for pod assignment                                 | `{}`

@@ -4,17 +4,22 @@
 
 replicaCount: 1
 
+startupProbe:
+  periodSeconds: 1
+  InitialDelaySeconds: 1
+  failureThreshold: 60
+
 readinessProbe:
-  periodSeconds: 60
-  InitialDelaySeconds: 60
+  periodSeconds: 10
+  InitialDelaySeconds: 0
 
 livenessProbe:
-  periodSeconds: 60
-  InitialDelaySeconds: 60
+  periodSeconds: 10
+  InitialDelaySeconds: 0
 
 image:
   repository: getmeili/meilisearch
-  tag: v0.29.0
+  tag: v0.30.0
   pullPolicy: IfNotPresent
   pullSecret:
 
@@ -107,6 +112,8 @@ resources: {}
 volumes: []
 
 volumeMounts: []
+
+containers: []
 
 nodeSelector: {}
 
