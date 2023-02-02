@@ -29,7 +29,7 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: {{ .Values.persistence.volume.name }}
           persistentVolumeClaim:
-            claimName: {{ include "meilisearch.fullname" . }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "meilisearch.fullname" . }}{{- end }}
         {{- end }}
         {{- if .Values.volumes }}
 {{ toYaml .Values.volumes | indent 8 }}
@@ -67,6 +67,13 @@ spec:
             - name: http
               containerPort: {{ .Values.container.containerPort }}
               protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.startupProbe.InitialDelaySeconds }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
           livenessProbe:
             httpGet:
               path: /health
@@ -81,6 +88,9 @@ spec:
             initialDelaySeconds: {{ .Values.readinessProbe.InitialDelaySeconds }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+      {{- if .Values.containers }}
+        {{ toYaml .Values.containers | nindent 8 }}
+      {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

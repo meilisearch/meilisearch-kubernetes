@@ -92,6 +92,8 @@ helm uninstall <your-service-name>
 | | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
 | | |
+| `persistence.existingClaim`      | Existing PVC                                                   | `false`
+| | |
 | `persistence.accessMode`         | PVC Access Mode                                                | `ReadWriteOnce`
 | | |
 | `persistence.storageClass`       | PVC Storage Class                                              | `-` (No storage class)
@@ -107,6 +109,8 @@ helm uninstall <your-service-name>
 | `volumes`                        | Additional volumes for pod                                     | `[]`
 | | |
 | `volumeMounts`                   | Additional volumes to mount on pod                             | `[]`
+| | |
+| `containers`                     | Additional containers for pod                                  | `[]`
 | | |
 | `tolerations`                    | Tolerations for pod assignment                                 | `[]`
 | | |
