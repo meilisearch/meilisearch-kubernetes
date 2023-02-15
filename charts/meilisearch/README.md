@@ -74,6 +74,8 @@ helm uninstall <your-service-name>
 | | |
 | `ingress.annotations`            | Ingress annotations                                            | `{}`
 | | |
+| `ingress.className`              | Ingress ingressClassName                                       | `nginx`
+| | |
 | `ingress.path`                   | Path within the host                                           | `/`
 | | |
 | `ingress.hosts`                  | List of hostnames                                              | `[meilisearch-example.local]`
