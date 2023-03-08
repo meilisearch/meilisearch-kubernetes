@@ -74,6 +74,8 @@ helm uninstall <your-service-name>
 | | |
 | `ingress.annotations`            | Ingress annotations                                            | `{}`
 | | |
+| `ingress.className`              | Ingress ingressClassName                                       | `nginx`
+| | |
 | `ingress.path`                   | Path within the host                                           | `/`
 | | |
 | `ingress.hosts`                  | List of hostnames                                              | `[meilisearch-example.local]`
@@ -92,6 +94,8 @@ helm uninstall <your-service-name>
 | | |
 | `persistence.enabled`            | Enable persistence using PVC                                   | `false`
 | | |
+| `persistence.existingClaim`      | Existing PVC                                                   | `false`
+| | |
 | `persistence.accessMode`         | PVC Access Mode                                                | `ReadWriteOnce`
 | | |
 | `persistence.storageClass`       | PVC Storage Class                                              | `-` (No storage class)
@@ -107,6 +111,8 @@ helm uninstall <your-service-name>
 | `volumes`                        | Additional volumes for pod                                     | `[]`
 | | |
 | `volumeMounts`                   | Additional volumes to mount on pod                             | `[]`
+| | |
+| `containers`                     | Additional containers for pod                                  | `[]`
 | | |
 | `tolerations`                    | Tolerations for pod assignment                                 | `[]`
 | | |
