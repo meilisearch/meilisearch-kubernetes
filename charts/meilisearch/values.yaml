@@ -123,7 +123,7 @@ affinity: {}
 
 command: []
 
-# -- Enable this Prometheus Operator
+# -- Enable this to use with Prometheus Operator
 serviceMonitor:
   # -- When set true then use a ServiceMonitor to configure scraping
   enabled: true
