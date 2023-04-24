@@ -120,11 +120,9 @@ helm uninstall <your-service-name>
 | | |
 | `affinity`                       | Affinity for pod assignment                                    | `{}`
 | | |
-| `serviceMonitor.enabled`         | Enable this to use with Prometheus Operator                    | `false`
+| `serviceMonitor.enabled`         | When set true then use a ServiceMonitor to configure scraping  | `true`
 | | |
 | `serviceMonitor.additionalLabels` | Set of labels to transfer from the Kubernetes Service onto the target | `{}`
-| | |
-| `serviceMonitor.enabled`         | When set true then use a ServiceMonitor to configure scraping  | `true`
 | | |
 | `serviceMonitor.interval`        | Set how frequently Prometheus should scrape                    | `"1m"` 
 | | |
