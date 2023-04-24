@@ -120,6 +120,23 @@ helm uninstall <your-service-name>
 | | |
 | `affinity`                       | Affinity for pod assignment                                    | `{}`
 | | |
+| `serviceMonitor.enabled`         | Enable this Prometheus Operator                                | `false`
+| | |
+| `serviceMonitor.additionalLabels` | Set of labels to transfer from the Kubernetes Service onto the target | `{}`
+| | |
+| `serviceMonitor.enabled`         | When set true then use a ServiceMonitor to configure scraping  | `true`
+| | |
+| `serviceMonitor.interval`        | Set how frequently Prometheus should scrape                    | `"1m"` 
+| | |
+| `serviceMonitor.metricRelabelings` | MetricRelabelConfigs to apply to samples before ingestion    | `[]`
+| | |
+| `serviceMonitor.relabelings`     | Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config | `[]`
+| | |
+| `serviceMonitor.scrapeTimeout`   | Set timeout for scrape                                         | `"10s"`
+| | |
+| `serviceMonitor.targetLabels`    | Set of labels to transfer from the Kubernetes Service onto the target | `[]` 
+| | |
+| `serviceMonitor.telemetryPath`   | Set path to metrics path                                       | `"/metrics"`
 
 
 ### Environment
