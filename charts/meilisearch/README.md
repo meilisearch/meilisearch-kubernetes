@@ -120,7 +120,7 @@ helm uninstall <your-service-name>
 | | |
 | `affinity`                       | Affinity for pod assignment                                    | `{}`
 | | |
-| `serviceMonitor.enabled`         | Enable this Prometheus Operator                                | `false`
+| `serviceMonitor.enabled`         | Enable this to use with Prometheus Operator                    | `false`
 | | |
 | `serviceMonitor.additionalLabels` | Set of labels to transfer from the Kubernetes Service onto the target | `{}`
 | | |
