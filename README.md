@@ -92,7 +92,7 @@ helm uninstall <your-service-name>
 
 ## 🤖 Compatibility with Meilisearch
 
-This chart guarantees compatibility with [version v1.x of Meilisearch](https://github.com/meilisearch/meilisearch/releases/latest), but some features may not be present. Please check the [issues](https://github.com/meilisearch/meilisearch-kubernetes/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+label%3Aenhancement) for more info.
+This chart only guarantees the compatibility with the [version v1.1.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.1.0).
 
 ## ⚙️ Development Workflow and Contributing
 
