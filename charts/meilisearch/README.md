@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.1.57](https://img.shields.io/badge/Version-0.1.57-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
+![Version: 0.1.58](https://img.shields.io/badge/Version-0.1.58-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -87,6 +87,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
 | persistence.volume.name | string | `"data"` |  |
 | podAnnotations | object | `{}` |  |
+| podLabels | object | `{}` | Additional labels to add to the pod(s) only |
 | podSecurityContext | object | `{}` |  |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |

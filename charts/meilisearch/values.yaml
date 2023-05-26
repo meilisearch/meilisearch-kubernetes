@@ -64,6 +64,9 @@ serviceAccount:
 
 podAnnotations: {}
 
+# -- Additional labels to add to the pod(s) only
+podLabels: {}
+
 # -- Additional labels to add to all resources
 customLabels: {}
 
