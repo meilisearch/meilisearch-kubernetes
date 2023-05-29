@@ -24,6 +24,10 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.image.pullSecret }}
       {{- end }}
+      {{- if .Values.image.podSecurityContext }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
       {{- if or .Values.persistence.enabled .Values.volumes }}
       volumes:
         {{- if .Values.persistence.enabled }}
@@ -39,6 +43,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
           {{- if or .Values.persistence.enabled .Values.volumeMounts }}
           volumeMounts:
             {{- if .Values.persistence.enabled }}

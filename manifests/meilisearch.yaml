@@ -80,6 +80,11 @@ spec:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.1.1"
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
           envFrom:
           - configMapRef:
               name: meilisearch-environment
