@@ -1,0 +1,6 @@
+---
+# Artifact Hub repository metadata file
+repositoryID: '207118b4-2d63-47ea-8171-34aeb0aefba9'
+owners: # (optional, used to claim repository ownership)
+  - name: alallema
+    email: amelie@meilisearch.com
