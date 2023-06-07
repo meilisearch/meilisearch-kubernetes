@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.1.50](https://img.shields.io/badge/Version-0.1.50-informational?style=flat-square) ![AppVersion: v1.0.0](https://img.shields.io/badge/AppVersion-v1.0.0-informational?style=flat-square)
+![Version: 0.1.55](https://img.shields.io/badge/Version-0.1.55-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -67,7 +67,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | image.pullPolicy | string | `"IfNotPresent"` | Meilisearch image pull policy |
 | image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
 | image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name  |
-| image.tag | string | `"v1.0.0"` | Meilisearch image tag  |
+| image.tag | string | `"v1.2.0"` | Meilisearch image tag  |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.className | string | `"nginx"` | Ingress ingressClassName |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
