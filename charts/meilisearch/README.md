@@ -44,7 +44,7 @@ helm uninstall <your-service-name>
 
 ## Environment
 
-The `environment` block allows to specify all the environment variables declared on [Meilisearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
+The `environment` block allows to specify all the environment variables declared on [Meilisearch Configuration](https://www.meilisearch.com/docs/learn/configuration/instance_options#all-instance-options)
 
 For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret.
 

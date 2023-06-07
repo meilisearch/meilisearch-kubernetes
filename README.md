@@ -6,7 +6,7 @@
 
 <h4 align="center">
   <a href="https://github.com/meilisearch/meilisearch">Meilisearch</a> |
-  <a href="https://docs.meilisearch.com">Documentation</a> |
+  <a href="https://www.meilisearch.com/docs">Documentation</a> |
   <a href="https://discord.meilisearch.com">Discord</a> |
   <a href="https://www.meilisearch.com">Website</a> |
   <a href="https://blog.meilisearch.com">Blog</a> |
@@ -31,7 +31,7 @@
 
 ## 📖 Documentation
 
-See our [Documentation](https://www.meilisearch.com/docs/learn/tutorials/getting_started.html) or our [API References](https://www.meilisearch.com/docs/reference/api/).
+See our [Documentation](https://www.meilisearch.com/docs/learn/getting_started/installation) or our [API References](https://www.meilisearch.com/docs/reference/api/overview).
 
 ## 🚀 Getting Started
 
