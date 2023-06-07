@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://github.com/meilisearch/meilisearch-kubernetes/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
-  <a href="https://app.bors.tech/repositories/29795"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
+  <a href="https://ms-bors.herokuapp.com/repositories/65"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
 </p>
 
 <p align="center">The Meilisearch tool for Kubernetes ⚓️</p>
@@ -92,7 +92,7 @@ helm uninstall <your-service-name>
 
 ## 🤖 Compatibility with Meilisearch
 
-This chart guarantees compatibility with [version v1.x of Meilisearch](https://github.com/meilisearch/meilisearch/releases/latest), but some features may not be present. Please check the [issues](https://github.com/meilisearch/meilisearch-kubernetes/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+label%3Aenhancement) for more info.
+This chart only guarantees the compatibility with the [version v1.2.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.2.0).
 
 ## ⚙️ Development Workflow and Contributing
 
