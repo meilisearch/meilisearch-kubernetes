@@ -74,6 +74,8 @@ spec:
         app.kubernetes.io/version: "v1.2.0"
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
+      annotations:
+        checksum/config: 6f8c0a50a22feeb157b65cae3b297c42440124f48c9ce7f61af14696f4ec4d3a
     spec:
       serviceAccountName: meilisearch
       containers:

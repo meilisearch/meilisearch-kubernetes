@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.1.55](https://img.shields.io/badge/Version-0.1.55-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
+![Version: 0.1.56](https://img.shields.io/badge/Version-0.1.56-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -54,7 +54,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` | Affinity for pod assignment  |
+| affinity | object | `{}` | Affinity for pod assignment |
 | auth.existingMasterKeySecret | string | `""` | Use an existing Kubernetes secret for the MEILI_MASTER_KEY |
 | command | list | `[]` | Pod command |
 | container.containerPort | int | `7700` |  |
@@ -62,12 +62,12 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | customLabels | object | `{}` | Additional labels to add to all resources |
 | envFrom | list | `[]` | Additional environment variables from ConfigMap or secrets |
 | environment.MEILI_ENV | string | `"development"` | Sets the environment. Either **production** or **development** |
-| environment.MEILI_NO_ANALYTICS | bool | `true` | Deactivates analytics  |
+| environment.MEILI_NO_ANALYTICS | bool | `true` | Deactivates analytics |
 | fullnameOverride | string | `""` | String to fully override meilisearch.fullname |
 | image.pullPolicy | string | `"IfNotPresent"` | Meilisearch image pull policy |
 | image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
-| image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name  |
-| image.tag | string | `"v1.2.0"` | Meilisearch image tag  |
+| image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name |
+| image.tag | string | `"v1.2.0"` | Meilisearch image tag |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.className | string | `"nginx"` | Ingress ingressClassName |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
@@ -81,7 +81,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.accessMode | string | `"ReadWriteOnce"` | PVC Access Mode |
 | persistence.annotations | object | `{}` | Additional annotations for PVC |
 | persistence.enabled | bool | `false` | Enable persistence using PVC |
-| persistence.existingClaim | string | `""` | Existing PVC  |
+| persistence.existingClaim | string | `""` | Existing PVC |
 | persistence.size | string | `"10Gi"` | PVC Storage Request |
 | persistence.storageClass | string | `"-"` | PVC Storage Class |
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
@@ -89,12 +89,12 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | podAnnotations | object | `{}` |  |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
-| replicaCount | int | `1` | Number of Meilisearch pods to run  |
+| replicaCount | int | `1` | Number of Meilisearch pods to run |
 | resources | object | `{}` | Resources allocation (Requests and Limits) |
 | service | object | `{"annotations":{},"port":7700,"type":"ClusterIP"}` | Service HTTP port |
 | service.annotations | object | `{}` | Additional annotations for service |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type |
-| serviceAccount.annotations | object | `{}` | Additional annotations for created service account  |
+| serviceAccount.annotations | object | `{}` | Additional annotations for created service account |
 | serviceAccount.create | bool | `true` | Should this chart create a service account |
 | serviceAccount.name | string | `""` | Custom service account name, if not created by this chart |
 | startupProbe.InitialDelaySeconds | int | `1` |  |
