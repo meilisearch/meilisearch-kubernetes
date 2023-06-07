@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# -- Number of Meilisearch pods to run 
+# -- Number of Meilisearch pods to run
 replicaCount: 1
 
 startupProbe:
@@ -19,9 +19,9 @@ livenessProbe:
   InitialDelaySeconds: 0
 
 image:
-  # -- Meilisearch image name 
+  # -- Meilisearch image name
   repository: getmeili/meilisearch
-  # -- Meilisearch image tag 
+  # -- Meilisearch image tag
   tag: v1.2.0
   # -- Meilisearch image pull policy
   pullPolicy: IfNotPresent
@@ -35,7 +35,7 @@ fullnameOverride: ""
 
 # Environment loaded into the configMap
 environment:
-  # -- Deactivates analytics 
+  # -- Deactivates analytics
   MEILI_NO_ANALYTICS: true
   # -- Sets the environment. Either **production** or **development**
   MEILI_ENV: development
@@ -59,7 +59,7 @@ serviceAccount:
   create: true
   # -- Custom service account name, if not created by this chart
   name: ''
-  # -- Additional annotations for created service account 
+  # -- Additional annotations for created service account
   annotations: {}
 
 podAnnotations: {}
@@ -115,7 +115,7 @@ persistence:
   ## Data Persistent Volume existing claim name
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  # -- Existing PVC 
+  # -- Existing PVC
   existingClaim: ""
   # -- PVC Storage Request
   size: 10Gi
@@ -153,7 +153,7 @@ nodeSelector: {}
 # -- Tolerations for pod assignment
 tolerations: []
 
-# -- Affinity for pod assignment 
+# -- Affinity for pod assignment
 affinity: {}
 
 # -- Pod command
