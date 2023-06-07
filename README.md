@@ -6,11 +6,11 @@
 
 <h4 align="center">
   <a href="https://github.com/meilisearch/meilisearch">Meilisearch</a> |
-  <a href="https://docs.meilisearch.com">Documentation</a> |
+  <a href="https://www.meilisearch.com/docs">Documentation</a> |
   <a href="https://discord.meilisearch.com">Discord</a> |
   <a href="https://www.meilisearch.com">Website</a> |
   <a href="https://blog.meilisearch.com">Blog</a> |
-  <a href="https://docs.meilisearch.com/faq">FAQ</a>
+  <a href="https://www.meilisearch.com/docs/faq">FAQ</a>
 </h4>
 
 <p align="center">
@@ -31,7 +31,7 @@
 
 ## 📖 Documentation
 
-See our [Documentation](https://docs.meilisearch.com/learn/tutorials/getting_started.html) or our [API References](https://docs.meilisearch.com/reference/api/).
+See our [Documentation](https://www.meilisearch.com/docs/learn/getting_started/installation) or our [API References](https://www.meilisearch.com/docs/reference/api/overview).
 
 ## 🚀 Getting Started
 
@@ -92,7 +92,7 @@ helm uninstall <your-service-name>
 
 ## 🤖 Compatibility with Meilisearch
 
-This chart only guarantees the compatibility with the [version v1.1.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.1.0).
+This chart only guarantees the compatibility with the [version v1.2.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.2.0).
 
 ## ⚙️ Development Workflow and Contributing
 

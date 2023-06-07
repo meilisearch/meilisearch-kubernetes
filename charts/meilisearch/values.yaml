@@ -2,6 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# -- Number of Meilisearch pods to run
 replicaCount: 1
 
 startupProbe:
@@ -18,35 +19,47 @@ livenessProbe:
   InitialDelaySeconds: 0
 
 image:
+  # -- Meilisearch image name
   repository: getmeili/meilisearch
-  tag: v1.1.1
+  # -- Meilisearch image tag
+  tag: v1.2.0
+  # -- Meilisearch image pull policy
   pullPolicy: IfNotPresent
+  # -- Secret to authenticate against the docker registry
   pullSecret:
 
+# -- String to partially override meilisearch.fullname
 nameOverride: ""
+# -- String to fully override meilisearch.fullname
 fullnameOverride: ""
 
 # Environment loaded into the configMap
 environment:
+  # -- Deactivates analytics
   MEILI_NO_ANALYTICS: true
+  # -- Sets the environment. Either **production** or **development**
   MEILI_ENV: development
   # For production deployment, the environment MEILI_MASTER_KEY is required.
   # If MEILI_ENV is set to "production" without setting MEILI_MASTER_KEY, this
   # chart will automatically create a secure MEILI_MASTER_KEY and push it as a
   # secret. Otherwise the below value of MEILI_MASTER_KEY will be used instead.
-  # MEILI_MASTER_KEY:
+  # MEILI_MASTER_KEY: ""
 auth:
-  # Use an existing Kubernetes secret for the MEILI_MASTER_KEY
+  # -- Use an existing Kubernetes secret for the MEILI_MASTER_KEY
   existingMasterKeySecret: ""
 
+# -- Additional environment variables from ConfigMap or secrets
 envFrom: []
 
 serviceAccount:
   # You can use a specific pre-created service account instead of
   # the one created by this chart.
   # Set create to false to prevent creating a service account and use your own.
+  # -- Should this chart create a service account
   create: true
+  # -- Custom service account name, if not created by this chart
   name: ''
+  # -- Additional annotations for created service account
   annotations: {}
 
 podAnnotations: {}
@@ -54,9 +67,12 @@ podAnnotations: {}
 # -- Additional labels to add to all resources
 customLabels: {}
 
+# -- Service HTTP port
 service:
+  # -- Kubernetes Service type
   type: ClusterIP
   port: 7700
+  # -- Additional annotations for service
   annotations: {}
 
 container:
@@ -72,20 +88,28 @@ securityContext:
   # readOnlyRootFilesystem: true
 
 ingress:
+  # -- Enable ingress controller resource
   enabled: false
+  # -- Ingress ingressClassName
   className: nginx
+  # -- Ingress annotations
   annotations: {}
     # kubernetes.io/ingress.class: nginx
+  # -- Path within the host
   path: /
+  # -- List of hostnames
   hosts:
     - meilisearch-example.local
+  # -- TLS specification
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
 persistence:
+  # -- Enable persistence using PVC
   enabled: false
+  # -- PVC Access Mode
   accessMode: ReadWriteOnce
   ## Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -94,18 +118,23 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  # storageClass: "-"
+  # -- PVC Storage Class
+  storageClass: "-"
 
   ## Data Persistent Volume existing claim name
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
+  # -- Existing PVC
   existingClaim: ""
+  # -- PVC Storage Request
   size: 10Gi
+  # -- Additional annotations for PVC
   annotations: {}
   volume:
     name: data
     mountPath: /meili_data
 
+# -- Resources allocation (Requests and Limits)
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -118,16 +147,23 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
+# -- Additional volumes for pod
 volumes: []
 
+# -- Additional volumes to mount on pod
 volumeMounts: []
 
+# -- Additional containers for pod
 containers: []
 
+# -- Node labels for pod assignment
 nodeSelector: {}
 
+# -- Tolerations for pod assignment
 tolerations: []
 
+# -- Affinity for pod assignment
 affinity: {}
 
+# -- Pod command
 command: []
