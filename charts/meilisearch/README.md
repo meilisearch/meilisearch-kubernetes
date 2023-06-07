@@ -1,4 +1,8 @@
-# Meilisearch
+# meilisearch
+
+A Helm chart for the Meilisearch search engine
+
+![Version: 0.1.55](https://img.shields.io/badge/Version-0.1.55-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -38,92 +42,67 @@ To uninstall/delete the `Meilisearch` deployment:
 helm uninstall <your-service-name>
 ```
 
-## Parameters
-
-| Parameter                        | Description                                                    | Default                           |
-|----------------------------------|----------------------------------------------------------------|-----------------------------------|
-| `nameOverride`                   | String to partially override meilisearch.fullname              | `nil`
-| | |
-| `fullnameOverride`               | String to fully override meilisearch.fullname                  | `nil`
-| | |
-| `replicaCount`                   | Number of Meilisearch pods to run                              | `1`
-| | |
-| `environment.MEILI_ENV`          | Sets the environment. Either **production** or **development** | `development`
-| | |
-| `environment.MEILI_NO_ANALYTICS` | Deactivates analytics                                          | `true`
-| | |
-| `auth.existingMasterKeySecret`   | Uses an existing secret that has the MEILI_MASTER_KEY set       | `nil`
-| | |
-| `envFrom`                        | Additional environment variables from ConfigMap or secrets      | `[]`
-| | |
-| `image.repository`               | Meilisearch image name                                         | `getmeili/meilisearch`
-| | |
-| `image.tag`                      | Meilisearch image tag                                          | `{TAG_NAME}`
-| | |
-| `image.pullPolicy`               | Meilisearch image pull policy                                  | `IfNotPresent`
-| | |
-| `image.pullSecret`               | Secret to authenticate against the docker registry             | '' |
-|                                  |                                                                |
-| `serviceAccount.create`          | Should this chart create a service account                     | `true`
-|                                  |                                                                |
-| `serviceAccount.annotations`     | Additional annotations for created service account             | `{}`
-|                                  |                                                                |
-| `serviceAccount.name`            | Custom service account name, if not created by this chart      | ''
-|                                  |                                                                |
-| `ingress.enabled`                | Enable ingress controller resource                             | `false`
-| | |
-| `ingress.annotations`            | Ingress annotations                                            | `{}`
-| | |
-| `ingress.className`              | Ingress ingressClassName                                       | `nginx`
-| | |
-| `ingress.path`                   | Path within the host                                           | `/`
-| | |
-| `ingress.hosts`                  | List of hostnames                                              | `[meilisearch-example.local]`
-| | |
-| `ingress.tls`                    | TLS specification                                              | `[]`
-| | |
-| `service.port`                   | Service HTTP port                                              | `7700`
-| | |
-| `service.type`                   | Kubernetes Service type                                        | `ClusterIP`
-| | |
-| `service.externalTrafficPolicy`  | Service external traffic policy                                | `-` (No external traffic policy)
-| | |
-| `service.loadBalancerIP`         | Service load balancer IP                                       | `-` (No load balancer IP)
-| | |
-| `service.annotations`            | Additional annotations for service                             | `{}`
-| | |
-| `persistence.enabled`            | Enable persistence using PVC                                   | `false`
-| | |
-| `persistence.existingClaim`      | Existing PVC                                                   | `false`
-| | |
-| `persistence.accessMode`         | PVC Access Mode                                                | `ReadWriteOnce`
-| | |
-| `persistence.storageClass`       | PVC Storage Class                                              | `-` (No storage class)
-| | |
-| `persistence.size`               | PVC Storage Request                                            | `10Gi`
-| | |
-| `persistence.annotations`        | Additional annotations for PVC                                 | `{}`
-| | |
-| `resources`                      | Resources allocation (Requests and Limits)                     | `{}`
-| | |
-| `command`                        | Pod command                                                    | `[]`
-| | |
-| `volumes`                        | Additional volumes for pod                                     | `[]`
-| | |
-| `volumeMounts`                   | Additional volumes to mount on pod                             | `[]`
-| | |
-| `containers`                     | Additional containers for pod                                  | `[]`
-| | |
-| `tolerations`                    | Tolerations for pod assignment                                 | `[]`
-| | |
-| `nodeSelector`                   | Node labels for pod assignment                                 | `{}`
-| | |
-| `affinity`                       | Affinity for pod assignment                                    | `{}`
-| | |
-
-
-### Environment
+## Environment
 
 The `environment` block allows to specify all the environment variables declared on [Meilisearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
 
-For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret. To get the value of this secret, you can read it with this command: `kubectl get secret meilisearch-master-key --template={{.data.MEILI_MASTER_KEY}} | base64 --decode`. You can also use `auth.existingMasterKeySecret` to use an existing secret that has the key `MEILI_MASTER_KEY`
+For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret.
+
+You can also use `auth.existingMasterKeySecret` to use an existing secret that has the key `MEILI_MASTER_KEY`
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity for pod assignment  |
+| auth.existingMasterKeySecret | string | `""` | Use an existing Kubernetes secret for the MEILI_MASTER_KEY |
+| command | list | `[]` | Pod command |
+| container.containerPort | int | `7700` |  |
+| containers | list | `[]` | Additional containers for pod |
+| customLabels | object | `{}` | Additional labels to add to all resources |
+| envFrom | list | `[]` | Additional environment variables from ConfigMap or secrets |
+| environment.MEILI_ENV | string | `"development"` | Sets the environment. Either **production** or **development** |
+| environment.MEILI_NO_ANALYTICS | bool | `true` | Deactivates analytics  |
+| fullnameOverride | string | `""` | String to fully override meilisearch.fullname |
+| image.pullPolicy | string | `"IfNotPresent"` | Meilisearch image pull policy |
+| image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
+| image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name  |
+| image.tag | string | `"v1.2.0"` | Meilisearch image tag  |
+| ingress.annotations | object | `{}` | Ingress annotations |
+| ingress.className | string | `"nginx"` | Ingress ingressClassName |
+| ingress.enabled | bool | `false` | Enable ingress controller resource |
+| ingress.hosts | list | `["meilisearch-example.local"]` | List of hostnames |
+| ingress.path | string | `"/"` | Path within the host |
+| ingress.tls | list | `[]` | TLS specification |
+| livenessProbe.InitialDelaySeconds | int | `0` |  |
+| livenessProbe.periodSeconds | int | `10` |  |
+| nameOverride | string | `""` | String to partially override meilisearch.fullname |
+| nodeSelector | object | `{}` | Node labels for pod assignment |
+| persistence.accessMode | string | `"ReadWriteOnce"` | PVC Access Mode |
+| persistence.annotations | object | `{}` | Additional annotations for PVC |
+| persistence.enabled | bool | `false` | Enable persistence using PVC |
+| persistence.existingClaim | string | `""` | Existing PVC  |
+| persistence.size | string | `"10Gi"` | PVC Storage Request |
+| persistence.storageClass | string | `"-"` | PVC Storage Class |
+| persistence.volume.mountPath | string | `"/meili_data"` |  |
+| persistence.volume.name | string | `"data"` |  |
+| podAnnotations | object | `{}` |  |
+| readinessProbe.InitialDelaySeconds | int | `0` |  |
+| readinessProbe.periodSeconds | int | `10` |  |
+| replicaCount | int | `1` | Number of Meilisearch pods to run  |
+| resources | object | `{}` | Resources allocation (Requests and Limits) |
+| service | object | `{"annotations":{},"port":7700,"type":"ClusterIP"}` | Service HTTP port |
+| service.annotations | object | `{}` | Additional annotations for service |
+| service.type | string | `"ClusterIP"` | Kubernetes Service type |
+| serviceAccount.annotations | object | `{}` | Additional annotations for created service account  |
+| serviceAccount.create | bool | `true` | Should this chart create a service account |
+| serviceAccount.name | string | `""` | Custom service account name, if not created by this chart |
+| startupProbe.InitialDelaySeconds | int | `1` |  |
+| startupProbe.failureThreshold | int | `60` |  |
+| startupProbe.periodSeconds | int | `1` |  |
+| tolerations | list | `[]` | Tolerations for pod assignment |
+| volumeMounts | list | `[]` | Additional volumes to mount on pod |
+| volumes | list | `[]` | Additional volumes for pod |
+
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
