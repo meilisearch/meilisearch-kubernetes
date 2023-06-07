@@ -8,3 +8,5 @@ home: https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/mei
 maintainers:
     - name: Amelie
       email: amelie@meilisearch.com
+    - name: Support Team
+      email: robot@meilisearch.com
