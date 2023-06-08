@@ -78,6 +78,15 @@ service:
 container:
   containerPort: 7700
 
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
+  # readOnlyRootFilesystem: true
+
 ingress:
   # -- Enable ingress controller resource
   enabled: false

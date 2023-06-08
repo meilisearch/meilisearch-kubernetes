@@ -75,13 +75,18 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 6f8c0a50a22feeb157b65cae3b297c42440124f48c9ce7f61af14696f4ec4d3a
+        checksum/config: 8893d8dad5cbf7ebfb0b70bb8b3214939bb540fb6fb780f39b2f3fb0d4b52d6f
     spec:
       serviceAccountName: meilisearch
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.2.0"
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
           envFrom:
           - configMapRef:
               name: meilisearch-environment
