@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.1.57](https://img.shields.io/badge/Version-0.1.57-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -87,13 +87,18 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
 | persistence.volume.name | string | `"data"` |  |
 | podAnnotations | object | `{}` |  |
-| podSecurityContext | object | `{}` |  |
+| podSecurityContext.fsGroup | int | `1000` |  |
+| podSecurityContext.fsGroupChangePolicy | string | `"OnRootMismatch"` |  |
+| podSecurityContext.runAsGroup | int | `1000` |  |
+| podSecurityContext.runAsNonRoot | bool | `true` |  |
+| podSecurityContext.runAsUser | int | `1000` |  |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | replicaCount | int | `1` | Number of Meilisearch pods to run |
 | resources | object | `{}` | Resources allocation (Requests and Limits) |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | service | object | `{"annotations":{},"port":7700,"type":"ClusterIP"}` | Service HTTP port |
 | service.annotations | object | `{}` | Additional annotations for service |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type |
