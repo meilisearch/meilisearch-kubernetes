@@ -87,12 +87,12 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
 | persistence.volume.name | string | `"data"` |  |
 | podAnnotations | object | `{}` |  |
+| podLabels | object | `{}` | Additional labels to add to the pod(s) only |
 | podSecurityContext.fsGroup | int | `1000` |  |
 | podSecurityContext.fsGroupChangePolicy | string | `"OnRootMismatch"` |  |
 | podSecurityContext.runAsGroup | int | `1000` |  |
 | podSecurityContext.runAsNonRoot | bool | `true` |  |
 | podSecurityContext.runAsUser | int | `1000` |  |
-| podLabels | object | `{}` | Additional labels to add to the pod(s) only |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | replicaCount | int | `1` | Number of Meilisearch pods to run |
