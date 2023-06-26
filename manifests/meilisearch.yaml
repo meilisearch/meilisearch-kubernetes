@@ -74,12 +74,36 @@ spec:
         app.kubernetes.io/version: "v1.2.0"
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
+      annotations:
+        checksum/config: 2feedcfe9e2a9425200a2c547238c64e882bd9160bf3a521e1dbab0e83ee246f
     spec:
       serviceAccountName: meilisearch
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: data
+          emptyDir: {}
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.2.0"
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: data
+              mountPath: /meili_data
           envFrom:
           - configMapRef:
               name: meilisearch-environment
