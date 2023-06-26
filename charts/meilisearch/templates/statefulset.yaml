@@ -14,6 +14,9 @@ spec:
     metadata:
       labels:
         {{- include "meilisearch.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       annotations:
         checksum/config: {{ (include (printf "%s/configmap.yaml" $.Template.BasePath) .) | sha256sum }}
       {{- with .Values.podAnnotations }}
