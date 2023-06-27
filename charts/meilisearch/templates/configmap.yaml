@@ -10,5 +10,4 @@ data:
   {{- end }}
   {{- if $.Values.serviceMonitor.enabled }}
   MEILI_EXPERIMENTAL_ENABLE_METRICS: "true"
-  {{ $key }}: {{ $value | quote}}
   {{- end }}
