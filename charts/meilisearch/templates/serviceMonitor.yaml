@@ -1,0 +1,47 @@
+{{- if.Values.serviceMonitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "meilisearch.fullname" . }}
+  labels:
+    {{- include "meilisearch.labels" . | nindent 4 }}
+    {{- with .Values.serviceMonitor.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  jobLabel: {{ .Release.Name }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "meilisearch.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: http
+      path: {{ .Values.serviceMonitor.telemetryPath }}
+      {{- with .Values.serviceMonitor.interval }}
+      interval: {{ . }}
+      {{- end }}
+      {{- with .Values.serviceMonitor.scrapeTimeout  }}
+      scrapeTimeout: {{ . }}
+      {{- end }}
+      {{- if .Values.serviceMonitor.metricRelabelings }}
+      metricRelabelings:
+      {{ toYaml .Values.serviceMonitor.metricRelabelings | indent 4 }}
+      {{- end }}
+      {{- if .Values.serviceMonitor.relabelings }}
+      relabelings:
+      {{ toYaml .Values.serviceMonitor.relabelings | nindent 4 }}
+      {{- end }}
+      {{- if or (.Values.environment.MEILI_MASTER_KEY) (.Values.auth.existingMasterKeySecret) (eq .Values.environment.MEILI_ENV "production") }}
+    - bearerTokenSecret:
+        name: meilisearch-master-key
+        key: MEILI_MASTER_KEY
+      {{- end }}
+  {{- if .Values.serviceMonitor.targetLabels }}
+  targetLabels:
+  {{- range .Values.serviceMonitor.targetLabels }}
+  - {{ . }}
+  {{- end }}
+  {{- end }}
+{{- end }}

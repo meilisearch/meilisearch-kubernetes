@@ -175,3 +175,22 @@ affinity: {}
 
 # -- Pod command
 command: []
+
+# -- Monitoring with Prometheus Operator
+serviceMonitor:
+  # -- Enable ServiceMonitor to configure scraping
+  enabled: false
+  # -- Set of labels to transfer from the Kubernetes Service onto the target
+  additionalLabels: {}
+  # -- Set scraping frequency
+  interval: 1m
+  # -- Set scraping timeout
+  scrapeTimeout: 10s
+  # -- Set path to metrics
+  telemetryPath: /metrics
+  # -- Set of labels to transfer from the Kubernetes Service onto the target
+  targetLabels: []
+  # -- MetricRelabelConfigs to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+  relabelings: []
