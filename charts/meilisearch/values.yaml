@@ -184,7 +184,7 @@ serviceMonitor:
   additionalLabels: {}
   # -- Set scraping frequency
   interval: 1m
-  # -- Set scraping timeout 
+  # -- Set scraping timeout
   scrapeTimeout: 10s
   # -- Set path to metrics
   telemetryPath: /metrics
