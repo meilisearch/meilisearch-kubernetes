@@ -64,6 +64,9 @@ serviceAccount:
 
 podAnnotations: {}
 
+# -- Additional labels to add to the pod(s) only
+podLabels: {}
+
 # -- Additional labels to add to all resources
 customLabels: {}
 
@@ -78,14 +81,19 @@ service:
 container:
   containerPort: 7700
 
-podSecurityContext: {}
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  fsGroupChangePolicy: OnRootMismatch
 
 securityContext:
   capabilities:
     drop:
       - ALL
   allowPrivilegeEscalation: false
-  # readOnlyRootFilesystem: true
+  readOnlyRootFilesystem: true
 
 ingress:
   # -- Enable ingress controller resource
@@ -167,3 +175,22 @@ affinity: {}
 
 # -- Pod command
 command: []
+
+# -- Monitoring with Prometheus Operator
+serviceMonitor:
+  # -- Enable ServiceMonitor to configure scraping
+  enabled: false
+  # -- Set of labels to transfer from the Kubernetes Service onto the target
+  additionalLabels: {}
+  # -- Set scraping frequency
+  interval: 1m
+  # -- Set scraping timeout
+  scrapeTimeout: 10s
+  # -- Set path to metrics
+  telemetryPath: /metrics
+  # -- Set of labels to transfer from the Kubernetes Service onto the target
+  targetLabels: []
+  # -- MetricRelabelConfigs to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+  relabelings: []

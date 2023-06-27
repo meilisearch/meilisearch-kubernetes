@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.1.57](https://img.shields.io/badge/Version-0.1.57-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -44,7 +44,7 @@ helm uninstall <your-service-name>
 
 ## Environment
 
-The `environment` block allows to specify all the environment variables declared on [Meilisearch Configuration](https://docs.meilisearch.com/guides/advanced_guides/configuration.html#passing-arguments-via-the-command-line)
+The `environment` block allows to specify all the environment variables declared on [Meilisearch Configuration](https://www.meilisearch.com/docs/learn/configuration/instance_options#command-line-options-and-flags)
 
 For production deployment, the `environment.MEILI_MASTER_KEY` is required. If `MEILI_ENV` is set to "production" without setting `environment.MEILI_MASTER_KEY`, then this chart will automatically create a secure `environment.MEILI_MASTER_KEY` as a secret.
 
@@ -87,19 +87,34 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
 | persistence.volume.name | string | `"data"` |  |
 | podAnnotations | object | `{}` |  |
-| podSecurityContext | object | `{}` |  |
+| podLabels | object | `{}` | Additional labels to add to the pod(s) only |
+| podSecurityContext.fsGroup | int | `1000` |  |
+| podSecurityContext.fsGroupChangePolicy | string | `"OnRootMismatch"` |  |
+| podSecurityContext.runAsGroup | int | `1000` |  |
+| podSecurityContext.runAsNonRoot | bool | `true` |  |
+| podSecurityContext.runAsUser | int | `1000` |  |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | replicaCount | int | `1` | Number of Meilisearch pods to run |
 | resources | object | `{}` | Resources allocation (Requests and Limits) |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | service | object | `{"annotations":{},"port":7700,"type":"ClusterIP"}` | Service HTTP port |
 | service.annotations | object | `{}` | Additional annotations for service |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type |
 | serviceAccount.annotations | object | `{}` | Additional annotations for created service account |
 | serviceAccount.create | bool | `true` | Should this chart create a service account |
 | serviceAccount.name | string | `""` | Custom service account name, if not created by this chart |
+| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics"}` | Monitoring with Prometheus Operator |
+| serviceMonitor.additionalLabels | object | `{}` | Set of labels to transfer from the Kubernetes Service onto the target |
+| serviceMonitor.enabled | bool | `false` | Enable ServiceMonitor to configure scraping |
+| serviceMonitor.interval | string | `"1m"` | Set scraping frequency |
+| serviceMonitor.metricRelabelings | list | `[]` | MetricRelabelConfigs to apply to samples before ingestion |
+| serviceMonitor.relabelings | list | `[]` | Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config |
+| serviceMonitor.scrapeTimeout | string | `"10s"` | Set scraping timeout  |
+| serviceMonitor.targetLabels | list | `[]` | Set of labels to transfer from the Kubernetes Service onto the target |
+| serviceMonitor.telemetryPath | string | `"/metrics"` | Set path to metrics |
 | startupProbe.InitialDelaySeconds | int | `1` |  |
 | startupProbe.failureThreshold | int | `60` |  |
 | startupProbe.periodSeconds | int | `1` |  |
