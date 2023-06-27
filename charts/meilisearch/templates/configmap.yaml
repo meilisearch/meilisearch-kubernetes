@@ -6,5 +6,9 @@ metadata:
     {{- include "meilisearch.labels" . | nindent 4 }}
 data:
   {{- range $key, $value := .Values.environment }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- if $.Values.serviceMonitor.enabled }}
+  MEILI_EXPERIMENTAL_ENABLE_METRICS: "true"
   {{ $key }}: {{ $value | quote}}
   {{- end }}
