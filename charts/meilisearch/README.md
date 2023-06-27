@@ -106,15 +106,15 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | serviceAccount.annotations | object | `{}` | Additional annotations for created service account |
 | serviceAccount.create | bool | `true` | Should this chart create a service account |
 | serviceAccount.name | string | `""` | Custom service account name, if not created by this chart |
-| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics"}` | Enable this to use with Prometheus Operator |
+| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics"}` | Monitoring with Prometheus Operator |
 | serviceMonitor.additionalLabels | object | `{}` | Set of labels to transfer from the Kubernetes Service onto the target |
-| serviceMonitor.enabled | bool | `false` | When set true then use a ServiceMonitor to configure scraping |
-| serviceMonitor.interval | string | `"1m"` | Set how frequently Prometheus should scrape |
+| serviceMonitor.enabled | bool | `false` | Enable ServiceMonitor to configure scraping |
+| serviceMonitor.interval | string | `"1m"` | Set scraping frequency |
 | serviceMonitor.metricRelabelings | list | `[]` | MetricRelabelConfigs to apply to samples before ingestion |
 | serviceMonitor.relabelings | list | `[]` | Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config |
-| serviceMonitor.scrapeTimeout | string | `"10s"` | Set timeout for scrape |
+| serviceMonitor.scrapeTimeout | string | `"10s"` | Set scraping timeout  |
 | serviceMonitor.targetLabels | list | `[]` | Set of labels to transfer from the Kubernetes Service onto the target |
-| serviceMonitor.telemetryPath | string | `"/metrics"` | Set path to metrics path |
+| serviceMonitor.telemetryPath | string | `"/metrics"` | Set path to metrics |
 | startupProbe.InitialDelaySeconds | int | `1` |  |
 | startupProbe.failureThreshold | int | `60` |  |
 | startupProbe.periodSeconds | int | `1` |  |
