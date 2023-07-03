@@ -34,7 +34,7 @@ spec:
       {{ toYaml .Values.serviceMonitor.relabelings | nindent 4 }}
       {{- end }}
       {{- if or (.Values.environment.MEILI_MASTER_KEY) (.Values.auth.existingMasterKeySecret) (eq .Values.environment.MEILI_ENV "production") }}
-    - bearerTokenSecret:
+      bearerTokenSecret:
         name: meilisearch-master-key
         key: MEILI_MASTER_KEY
       {{- end }}
