@@ -2,9 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# -- Number of Meilisearch pods to run
-replicaCount: 1
-
 startupProbe:
   periodSeconds: 1
   InitialDelaySeconds: 1
