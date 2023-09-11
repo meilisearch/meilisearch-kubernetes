@@ -6,5 +6,7 @@ version: 0.2.4
 icon: https://res.cloudinary.com/meilisearch/image/upload/v1597822872/Logo/logo_img.svg
 home: https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch
 maintainers:
-    - name: Amelie
-      email: amelie@meilisearch.com
+    - name: Bruno
+      email: bruno@meilisearch.com
+    - name: Clementine
+      email: clementine@meilisearch.com
