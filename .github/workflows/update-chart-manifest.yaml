@@ -15,6 +15,11 @@ jobs:
         id: get-pr
         with:
           script: |
+            const core = require('@actions/core')
+            const github = require('@actions/github')
+            const token = core.getInput('github-token', { required: true })
+            const octokit = github.getOctokit(token)
+
             const request = {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -22,11 +27,12 @@ jobs:
             }
             core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`)
             try {
-              const result = await github.pulls.get(request)
+              const result = await octokit.pulls.get(request)
               return result.data
             } catch (err) {
               core.setFailed(`Request failed with error ${err}`)
             }
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       # Now checkout the PR, generate the template and then commit to the PR
       - name: Checkout
