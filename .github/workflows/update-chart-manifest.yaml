@@ -11,7 +11,7 @@ jobs:
     steps:
       # There isn't enough detail in the github.event on "issue_comment" events about the PR origin, so we need to fetch more
       - name: "Get Pull Request"
-        uses: actions/github-script@v6
+        uses: actions/github-script@v3
         id: get-pr
         with:
           script: |
