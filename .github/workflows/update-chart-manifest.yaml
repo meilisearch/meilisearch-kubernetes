@@ -41,13 +41,13 @@ jobs:
         id: helm_template
         run: |
           helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
-          echo "has_changes=$(if git diff --quiet && git diff --quiet --cached; then echo false; else echo true; fi)" >> "$GITHUB_ENV"
+          echo "has_changes=$(if git diff --quiet && git diff --quiet --cached; then echo "false"; else echo "true"; fi)" >> "$GITHUB_ENV"
 
       - name: Commit manifest changes
         run: |
           if [[ $has_changes == "true" ]]; then
             echo "There are changes in the Git working directory."
-            
+
             git config user.name "$GITHUB_ACTOR"
             git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
             git add .
