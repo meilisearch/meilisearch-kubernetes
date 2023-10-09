@@ -39,10 +39,10 @@ jobs:
         id: helm_template
         run: |
           helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
-          echo "::set-output name=has_changes::$(if git diff --quiet && git diff --quiet --cached; then echo "false"; else echo "true"; fi)"
+          echo "has_changes=$(if git diff --quiet && git diff --quiet --cached; then echo false; else echo true; fi)" >> $GITHUB_ENV
 
       - name: Commit manifest changes
-        if: steps.helm_template.outputs.has_changes == 'true'
+        if: env.has_changes == 'true'
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
