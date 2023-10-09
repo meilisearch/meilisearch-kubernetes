@@ -55,5 +55,4 @@ jobs:
             git push --set-upstream origin ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           else
             echo "No changes in the Git working directory."
-            # Add your further actions here if there are no changes.
           fi
