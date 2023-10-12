@@ -26,6 +26,25 @@ data:
   MEILI_ENV: "development"
   MEILI_NO_ANALYTICS: "true"
 ---
+# Source: meilisearch/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: meilisearch
+  labels:
+    app.kubernetes.io/name: meilisearch
+    app.kubernetes.io/instance: meilisearch
+    app.kubernetes.io/version: "v1.4.0"
+    app.kubernetes.io/component: search-engine
+    app.kubernetes.io/part-of: meilisearch
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+  storageClassName: ""
+---
 # Source: meilisearch/templates/service.yaml
 apiVersion: v1
 kind: Service
@@ -88,7 +107,8 @@ spec:
         - name: tmp
           emptyDir: {}
         - name: data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: meilisearch
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.4.0"
