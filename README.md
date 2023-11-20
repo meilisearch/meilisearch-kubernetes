@@ -23,13 +23,7 @@
 
 **Meilisearch** is an open-source search engine. [Discover what Meilisearch is!](https://github.com/meilisearch/meilisearch)
 
----
-
-### 🔥 On November 2nd, we are hosting our first-ever live demo and product updates for [Meilisearch Cloud](https://www.meilisearch.com/cloud?utm_campaign=oss&utm_source=github&utm_medium=meilisearch). Make sure to [register here](https://us06web.zoom.us/meeting/register/tZMlc-mqrjIsH912-HTRe-AaT-pp41bDe81a#/registration) and bring your questions for live Q&A!
-
----
-
-## Table of Contents <!-- omit in toc -->
+## Table of Contents <!-- omit in TOC -->
 
 - [📖 Documentation](#-documentation)
 - [⚡ Supercharge your Meilisearch experience](#-supercharge-your-meilisearch-experience)
@@ -103,7 +97,7 @@ helm uninstall <your-service-name>
 
 ## 🤖 Compatibility with Meilisearch
 
-This chart only guarantees the compatibility with the [version v1.4.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.4.0).
+This chart only guarantees the compatibility with the [version v1.5.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.5.0).
 
 ## ⚙️ Development Workflow and Contributing
 
