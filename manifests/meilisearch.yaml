@@ -34,7 +34,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.4.0"
+    app.kubernetes.io/version: "v1.5.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -94,7 +94,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: e65a5b09b17b1effcddb830c9a9bdecd1f3ce42695ebf236191c61393ab0ed32
+        checksum/config: 86a4086cc53ccd0628648b68320a381a6963524b7d68295cbdecc4cb5554238f
     spec:
       serviceAccountName: meilisearch
       securityContext:
