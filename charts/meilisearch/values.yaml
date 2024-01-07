@@ -113,7 +113,7 @@ ingress:
 
 persistence:
   # -- Enable persistence using PVC
-  enabled: false
+  enabled: true
   # -- PVC Access Mode
   accessMode: ReadWriteOnce
   ## Persistent Volume Storage Class
