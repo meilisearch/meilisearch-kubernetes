@@ -89,6 +89,9 @@ spec:
           emptyDir: {}
         - name: data
           emptyDir: {}
+
+      
+            
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.7.0"
