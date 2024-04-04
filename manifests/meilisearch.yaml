@@ -75,7 +75,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 35d680140fa9645374b032a4c6f416b2932bd677d97949691b714ece482ffa69
+        checksum/config: a0b986784ffc3cc8552f85f04f7d4796ae5f5773c344b6ad1827d8a9b68fde9e
     spec:
       serviceAccountName: meilisearch
       securityContext:
