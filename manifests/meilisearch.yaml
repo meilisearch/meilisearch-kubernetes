@@ -75,7 +75,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 468906c495caf47f44d906b3f928bbf1c5ee0fd11b345f9d07cbbc6d626b8fcf
+        checksum/config: 35d680140fa9645374b032a4c6f416b2932bd677d97949691b714ece482ffa69
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -89,6 +89,9 @@ spec:
           emptyDir: {}
         - name: data
           emptyDir: {}
+
+      
+            
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.7.0"
