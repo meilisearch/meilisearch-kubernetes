@@ -67,6 +67,9 @@ podLabels: {}
 # -- Additional labels to add to all resources
 customLabels: {}
 
+# -- Priority class name for pod
+priorityClassName: ""
+
 # -- Service HTTP port
 service:
   # -- Kubernetes Service type
