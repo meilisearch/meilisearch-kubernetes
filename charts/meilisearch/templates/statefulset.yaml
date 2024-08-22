@@ -7,7 +7,7 @@ metadata:
 spec:
   # Value 0 is bad interpreted it goes to 1 by default
   # https://github.com/helm/helm/issues/3164
-  {{- if (eq 0 (int .Values.pod.replicas))}}
+  {{- if (eq 0 (int .Values.replicaCount))}}
   replicas: 0
   {{- else }}
   replicas: {{ .Values.replicaCount | default 1 }}
