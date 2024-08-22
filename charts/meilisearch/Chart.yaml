@@ -2,11 +2,11 @@ apiVersion: v1
 appVersion: "v1.9.0"
 description: A Helm chart for the Meilisearch search engine
 name: meilisearch
-version: 0.9.1
+version: 0.9.2
 icon: https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/logo.svg
 home: https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch
 maintainers:
-    - name: Bruno
-      email: bruno@meilisearch.com
-    - name: Clementine
-      email: clementine@meilisearch.com
+  - name: Bruno
+    email: bruno@meilisearch.com
+  - name: Clementine
+    email: clementine@meilisearch.com
