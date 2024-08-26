@@ -67,6 +67,9 @@ podLabels: {}
 # -- Additional labels to add to all resources
 customLabels: {}
 
+# -- Priority class name for pod
+priorityClassName: ""
+
 # -- Service HTTP port
 service:
   # -- Kubernetes Service type
@@ -125,7 +128,7 @@ persistence:
   ##   GKE, AWS & OpenStack)
   ##
   # -- PVC Storage Class
-  storageClass: "-"
+  storageClass: ~
 
   ## Data Persistent Volume existing claim name
   ## Requires persistence.enabled: true
