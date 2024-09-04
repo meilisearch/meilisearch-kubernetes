@@ -25,13 +25,13 @@ spec:
       {{- with .Values.serviceMonitor.scrapeTimeout  }}
       scrapeTimeout: {{ . }}
       {{- end }}
-      {{- if .Values.serviceMonitor.metricRelabelings }}
+      {{- with .Values.serviceMonitor.metricRelabelings }}
       metricRelabelings:
-      {{ toYaml .Values.serviceMonitor.metricRelabelings | indent 4 }}
+        {{- toYaml . | indent 8 }}
       {{- end }}
-      {{- if .Values.serviceMonitor.relabelings }}
+      {{- with .Values.serviceMonitor.relabelings }}
       relabelings:
-      {{ toYaml .Values.serviceMonitor.relabelings | nindent 4 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if or (.Values.environment.MEILI_MASTER_KEY) (.Values.auth.existingMasterKeySecret) (eq .Values.environment.MEILI_ENV "production") }}
       bearerTokenSecret:
