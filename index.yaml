@@ -3,6 +3,22 @@ entries:
   meilisearch:
   - apiVersion: v1
     appVersion: v1.10.0
+    created: "2024-09-15T23:03:51.097289218Z"
+    description: A Helm chart for the Meilisearch search engine
+    digest: 04cd9845992128360d1801854b9f98c79e7283707b92dabc5e9ede9effc8079c
+    home: https://github.com/meilisearch/meilisearch-kubernetes/tree/main/charts/meilisearch
+    icon: https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/logo.svg
+    maintainers:
+    - email: bruno@meilisearch.com
+      name: Bruno
+    - email: clementine@meilisearch.com
+      name: Clementine
+    name: meilisearch
+    urls:
+    - https://github.com/meilisearch/meilisearch-kubernetes/releases/download/meilisearch-0.10.1/meilisearch-0.10.1.tgz
+    version: 0.10.1
+  - apiVersion: v1
+    appVersion: v1.10.0
     created: "2024-08-26T13:00:36.66986658Z"
     description: A Helm chart for the Meilisearch search engine
     digest: f5c021ad2377e042cc5253df5938fb85cc9fcc5bdcb1a83352d618bac6bf353d
@@ -1169,4 +1185,4 @@ entries:
     urls:
     - https://github.com/meilisearch/meilisearch-kubernetes/releases/download/meilisearch-0.1.12/meilisearch-0.1.12.tgz
     version: 0.1.12
-generated: "2024-08-26T13:00:36.670167762Z"
+generated: "2024-09-15T23:03:51.097487058Z"
