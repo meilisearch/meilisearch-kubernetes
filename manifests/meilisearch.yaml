@@ -60,7 +60,9 @@ metadata:
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
-  replicas: 1
+  # Value 0 is bad interpreted it goes to 1 by default
+  # https://github.com/helm/helm/issues/3164
+  replicas: 0
   serviceName: meilisearch
   selector:
     matchLabels:
