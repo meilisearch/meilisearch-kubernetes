@@ -75,7 +75,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 57066f343c11bb744192756429e406248806cda981bd4a71c7c02dcafc103072
+        checksum/config: 3b17fd234a29aacf2e98ffa09aca207fa5519140923bc64b656070f54412fe1f
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -90,8 +90,6 @@ spec:
         - name: data
           emptyDir: {}
 
-      
-            
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.10.0"
@@ -100,7 +98,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-              - ALL
+                - ALL
             readOnlyRootFilesystem: true
           volumeMounts:
             - name: tmp
@@ -108,8 +106,8 @@ spec:
             - name: data
               mountPath: /meili_data
           envFrom:
-          - configMapRef:
-              name: meilisearch-environment
+            - configMapRef:
+                name: meilisearch-environment
           ports:
             - name: http
               containerPort: 7700
@@ -133,8 +131,7 @@ spec:
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
-          resources:
-            {}
+          resources: {}
 ---
 # Source: meilisearch/templates/tests/test-connection.yaml
 apiVersion: v1
@@ -150,6 +147,6 @@ spec:
   containers:
     - name: wget
       image: busybox
-      command: ['wget']
-      args:  ['meilisearch:7700']
+      command: ["wget"]
+      args: ["meilisearch:7700"]
   restartPolicy: Never
