@@ -60,7 +60,9 @@ metadata:
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
-  replicas: 1
+  # Value 0 is bad interpreted it goes to 1 by default
+  # https://github.com/helm/helm/issues/3164
+  replicas: 0
   serviceName: meilisearch
   selector:
     matchLabels:
@@ -90,6 +92,8 @@ spec:
         - name: data
           emptyDir: {}
 
+      
+            
       containers:
         - name: meilisearch
           image: "getmeili/meilisearch:v1.10.0"
@@ -98,7 +102,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-                - ALL
+              - ALL
             readOnlyRootFilesystem: true
           volumeMounts:
             - name: tmp
@@ -106,8 +110,8 @@ spec:
             - name: data
               mountPath: /meili_data
           envFrom:
-            - configMapRef:
-                name: meilisearch-environment
+          - configMapRef:
+              name: meilisearch-environment
           ports:
             - name: http
               containerPort: 7700
@@ -131,7 +135,8 @@ spec:
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
-          resources: {}
+          resources:
+            {}
 ---
 # Source: meilisearch/templates/tests/test-connection.yaml
 apiVersion: v1
@@ -147,6 +152,6 @@ spec:
   containers:
     - name: wget
       image: busybox
-      command: ["wget"]
-      args: ["meilisearch:7700"]
+      command: ['wget']
+      args:  ['meilisearch:7700']
   restartPolicy: Never
