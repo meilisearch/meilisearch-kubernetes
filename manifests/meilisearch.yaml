@@ -117,20 +117,20 @@ spec:
           startupProbe:
             httpGet:
               path: /health
-              port: 7700
+              port: http
             periodSeconds: 1
             initialDelaySeconds: 1
             failureThreshold: 60
           livenessProbe:
             httpGet:
               path: /health
-              port: 7700
+              port: http
             periodSeconds: 10
             initialDelaySeconds: 0
           readinessProbe:
             httpGet:
               path: /health
-              port: 7700
+              port: http
             periodSeconds: 10
             initialDelaySeconds: 0
           resources:
