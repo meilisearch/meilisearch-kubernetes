@@ -19,7 +19,7 @@ image:
   # -- Meilisearch image name
   repository: getmeili/meilisearch
   # -- Meilisearch image tag
-  tag: v0.12.0
+  tag: v1.12.0
   # -- Meilisearch image pull policy
   pullPolicy: IfNotPresent
   # -- Secret to authenticate against the docker registry
