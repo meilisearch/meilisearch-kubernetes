@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "meilisearch.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "meilisearch.labels" . | nindent 4 }}
 spec:

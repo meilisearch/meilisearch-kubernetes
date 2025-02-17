@@ -4,6 +4,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: meilisearch
+  namespace: default
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
@@ -16,6 +17,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: meilisearch-environment
+  namespace: default
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
@@ -31,6 +33,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: meilisearch
+  namespace: default
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
@@ -53,6 +56,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: meilisearch
+  namespace: default
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
@@ -75,7 +79,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: e34c2feaa89da8539b9da7d9ae7e5b060bf0b69bd75fc0e58bbaacc351ae98dc
+        checksum/config: 6e27e29db250c424570b2bd640c2a03aa4ae86e332990b6b26c67e41a073d0f0
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -141,6 +145,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: meilisearch-test-connection
+  namespace: default
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
