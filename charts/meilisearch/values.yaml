@@ -185,8 +185,8 @@ command: []
 serviceMonitor:
   # -- Enable ServiceMonitor to configure scraping
   enabled: false
-  # -- Set of labels to transfer from the Kubernetes Service onto the target
-  namespace:  # @schema type:[string, null]; default: null
+  # -- Set Namespace
+  namespace: null
   # -- Set of labels to transfer from the Kubernetes Service onto the target
   additionalLabels: {}
   # -- Set scraping frequency
