@@ -6,14 +6,17 @@ startupProbe:
   periodSeconds: 1
   InitialDelaySeconds: 1
   failureThreshold: 60
+  timeoutSeconds: 1
 
 readinessProbe:
   periodSeconds: 10
   InitialDelaySeconds: 0
+  timeoutSeconds: 10
 
 livenessProbe:
   periodSeconds: 10
   InitialDelaySeconds: 0
+  timeoutSeconds: 10
 
 image:
   # -- Meilisearch image name
