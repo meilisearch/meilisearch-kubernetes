@@ -121,18 +121,21 @@ spec:
             periodSeconds: 1
             initialDelaySeconds: 1
             failureThreshold: 60
+            timeoutSeconds: 1
           livenessProbe:
             httpGet:
               path: /health
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /health
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
+            timeoutSeconds: 10
           resources:
             {}
 ---
