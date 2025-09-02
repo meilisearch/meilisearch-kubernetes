@@ -68,6 +68,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
 | image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name |
 | image.tag | string | `"v1.2.0"` | Meilisearch image tag |
+| image.digest | string | `""` | 	Meilisearch image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.className | string | `"nginx"` | Ingress ingressClassName |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
