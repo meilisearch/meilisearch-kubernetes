@@ -75,7 +75,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 99f5ed2d93e472f0e548cad1d77278ea3fe2d8837f911ab7a999958f71bbc945
+        checksum/config: 3475180c39b5741fb0c3f07283ca79ec3d6666080733103b501c9f6b31111c4e
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -121,18 +121,21 @@ spec:
             periodSeconds: 1
             initialDelaySeconds: 1
             failureThreshold: 60
+            timeoutSeconds: 1
           livenessProbe:
             httpGet:
               path: /health
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /health
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
+            timeoutSeconds: 10
           resources:
             {}
 ---
