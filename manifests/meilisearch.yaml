@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.17.0"
+    app.kubernetes.io/version: "v1.18.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 ---
@@ -19,7 +19,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.17.0"
+    app.kubernetes.io/version: "v1.18.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 data:
@@ -34,7 +34,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.17.0"
+    app.kubernetes.io/version: "v1.18.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -56,7 +56,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.17.0"
+    app.kubernetes.io/version: "v1.18.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -71,11 +71,11 @@ spec:
       labels:
         app.kubernetes.io/name: meilisearch
         app.kubernetes.io/instance: meilisearch
-        app.kubernetes.io/version: "v1.17.0"
+        app.kubernetes.io/version: "v1.18.0"
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 21bcb8a3d9af131f96691de78732cfd8b5bbd099c261413c293297d4135c2e7b
+        checksum/config: e94f5cb3ce20f3053874a38a565d15332a00d03e78a7d14f0dc491ee22aeac5b
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -94,7 +94,7 @@ spec:
             
       containers:
         - name: meilisearch
-          image: "getmeili/meilisearch:v1.17.0"
+          image: "getmeili/meilisearch:v1.18.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
