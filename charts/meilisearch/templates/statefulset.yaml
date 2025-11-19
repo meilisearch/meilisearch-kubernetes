@@ -89,23 +89,35 @@ spec:
               protocol: TCP
           startupProbe:
             httpGet:
-              path: /health
+              path: {{ .Values.startupProbe.path }}
               port: http
+              {{- if .Values.startupProbe.httpHeaders }}
+              httpHeaders:
+                {{- toYaml .Values.startupProbe.httpHeaders | nindent 8 }}
+              {{- end }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds }}
             initialDelaySeconds: {{ .Values.startupProbe.InitialDelaySeconds }}
             failureThreshold: {{ .Values.startupProbe.failureThreshold }}
             timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
           livenessProbe:
             httpGet:
-              path: /health
+              path: {{ .Values.livenessProbe.path }}
               port: http
+              {{- if .Values.livenessProbe.httpHeaders }}
+              httpHeaders:
+                {{- toYaml .Values.livenessProbe.httpHeaders | nindent 8 }}
+              {{- end }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             initialDelaySeconds: {{ .Values.livenessProbe.InitialDelaySeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
           readinessProbe:
             httpGet:
-              path: /health
+              path: {{ .Values.readinessProbe.path }}
               port: http
+              {{- if .Values.readinessProbe.httpHeaders }}
+              httpHeaders:
+                {{- toYaml .Values.readinessProbe.httpHeaders | nindent 8 }}
+              {{- end }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             initialDelaySeconds: {{ .Values.readinessProbe.InitialDelaySeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
