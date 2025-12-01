@@ -2,11 +2,9 @@ name: Tests
 on:
   pull_request:
   push:
-    # trying and staging branches are for BORS config
     branches:
-      - trying
-      - staging
       - main
+  merge_group:
 
 jobs:
   linter:
@@ -78,9 +76,9 @@ jobs:
         id: helm_template
         run: |
           helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
-          if git diff --quiet && git diff --quiet --cached; then 
-            echo "✅ Manifests are in sync"; 
-          else 
+          if git diff --quiet && git diff --quiet --cached; then
+            echo "✅ Manifests are in sync";
+          else
             echo "❌ Manifest update required. Comment on your PR with '@meilisearch sync-manifest' to update the manifest";
             exit 1
           fi
