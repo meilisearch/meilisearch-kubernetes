@@ -10,6 +10,7 @@ metadata:
     app.kubernetes.io/version: "v1.18.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
+automountServiceAccountToken: false
 ---
 # Source: meilisearch/templates/configmap.yaml
 apiVersion: v1
