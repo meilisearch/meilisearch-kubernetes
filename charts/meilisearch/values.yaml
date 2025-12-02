@@ -61,6 +61,10 @@ serviceAccount:
   name: ""
   # -- Additional annotations for created service account
   annotations: {}
+  ## @param serviceAccount.automountServiceAccountToken Allows auto mount of ServiceAccountToken on the serviceAccount created
+  ## Can be set to false if pods using this serviceAccount do not need to use K8s API
+  ##
+  automountServiceAccountToken: false
 
 podAnnotations: {}
 
