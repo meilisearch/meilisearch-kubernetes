@@ -16,10 +16,22 @@ jobs:
         id: version
         run: |
           VERSION="${{ github.event.client_payload.version }}"
+
+          # Sanitize: remove newlines, carriage returns, and % characters to prevent injection
+          VERSION=$(printf '%s' "$VERSION" | tr -d '\n\r%')
+
           if [ -z "$VERSION" ]; then
             echo "::error::No version provided in payload"
             exit 1
           fi
+
+          # Validate against SemVer pattern (optional v prefix, MAJOR.MINOR.PATCH, optional pre-release/build)
+          SEMVER_REGEX='^v?[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?(\+[a-zA-Z0-9.]+)?$'
+          if ! [[ "$VERSION" =~ $SEMVER_REGEX ]]; then
+            echo "::error::Invalid version format '$VERSION'. Expected SemVer (e.g., v1.2.3 or 1.2.3-beta.1)"
+            exit 1
+          fi
+
           echo "new_version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "📦 New Meilisearch version: $VERSION"
 
@@ -44,12 +56,33 @@ jobs:
         if: steps.check.outputs.needs_update == 'true'
         run: |
           # Update appVersion
-          sed -i 's/^appVersion: .*/appVersion: "${{ steps.version.outputs.new_version }}"/' charts/meilisearch/Chart.yaml
+          NEW_VERSION="${{ steps.version.outputs.new_version }}"
+          # Escape sed-special characters (/, &, \)
+          ESCAPED_VERSION=$(printf '%s\n' "$NEW_VERSION" | sed 's/[\/&]/\\&/g')
+          sed -i "s/^appVersion: .*/appVersion: \"$ESCAPED_VERSION\"/" charts/meilisearch/Chart.yaml
 
           # Increment chart minor version (e.g., 0.17.1 -> 0.18.0)
           CURRENT_CHART_VERSION=$(grep -oP '^version: \K.*' charts/meilisearch/Chart.yaml)
+
+          # Validate CURRENT_CHART_VERSION is not empty
+          if [ -z "$CURRENT_CHART_VERSION" ]; then
+            echo "::error::Failed to parse 'version' from Chart.yaml (empty or missing)"
+            exit 1
+          fi
+
           MAJOR=$(echo "$CURRENT_CHART_VERSION" | cut -d. -f1)
           MINOR=$(echo "$CURRENT_CHART_VERSION" | cut -d. -f2)
+
+          # Validate MAJOR and MINOR are numeric
+          if ! [[ "$MAJOR" =~ ^[0-9]+$ ]]; then
+            echo "::error::Invalid MAJOR version '$MAJOR' (expected numeric) in Chart.yaml version '$CURRENT_CHART_VERSION'"
+            exit 1
+          fi
+          if ! [[ "$MINOR" =~ ^[0-9]+$ ]]; then
+            echo "::error::Invalid MINOR version '$MINOR' (expected numeric) in Chart.yaml version '$CURRENT_CHART_VERSION'"
+            exit 1
+          fi
+
           NEW_MINOR=$((MINOR + 1))
           NEW_CHART_VERSION="${MAJOR}.${NEW_MINOR}.0"
           sed -i "s/^version: .*/version: $NEW_CHART_VERSION/" charts/meilisearch/Chart.yaml
@@ -63,8 +96,10 @@ jobs:
 
       - name: Update values.yaml
         if: steps.check.outputs.needs_update == 'true'
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
         run: |
-          sed -i 's/^  tag: .*/  tag: ${{ steps.version.outputs.new_version }}/' charts/meilisearch/values.yaml
+          yq eval '.image.tag = strenv(NEW_VERSION)' -i charts/meilisearch/values.yaml
 
       - name: Regenerate manifests
         if: steps.check.outputs.needs_update == 'true'
