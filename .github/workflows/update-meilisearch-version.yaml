@@ -3,6 +3,13 @@ name: Update Meilisearch Version
 on:
   repository_dispatch:
     types: [meilisearch-release]
+  # For testing purposes
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Meilisearch version to test (e.g., v1.25.0)'
+        required: true
+        type: string
 
 jobs:
   update-version:
