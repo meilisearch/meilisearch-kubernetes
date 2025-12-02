@@ -124,7 +124,7 @@ jobs:
         with:
           token: ${{ secrets.MEILI_BOT_GH_PAT }}
           commit-message: "chore(version): bump Meilisearch to ${{ steps.version.outputs.new_version }}"
-          title: "⬆️ Bump Meilisearch to ${{ steps.version.outputs.new_version }}"
+          title: "Bump Meilisearch to ${{ steps.version.outputs.new_version }}"
           body: |
             ## Description
 
@@ -149,5 +149,6 @@ jobs:
           labels: |
             dependencies
             automated
+          reviewers: brunoocasali
           delete-branch: true
 
