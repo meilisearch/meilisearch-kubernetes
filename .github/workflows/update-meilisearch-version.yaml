@@ -22,7 +22,12 @@ jobs:
       - name: Get version from payload
         id: version
         run: |
-          VERSION="${{ github.event.client_payload.version }}"
+          # Support both repository_dispatch (client_payload) and workflow_dispatch (inputs)
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${{ github.event.client_payload.version }}"
+          fi
 
           # Sanitize: remove newlines, carriage returns, and % characters to prevent injection
           VERSION=$(printf '%s' "$VERSION" | tr -d '\n\r%')
@@ -119,7 +124,7 @@ jobs:
         with:
           token: ${{ secrets.MEILI_BOT_GH_PAT }}
           commit-message: "chore(version): bump Meilisearch to ${{ steps.version.outputs.new_version }}"
-          title: "⬆️ Bump Meilisearch to ${{ steps.version.outputs.new_version }}"
+          title: "Bump Meilisearch to ${{ steps.version.outputs.new_version }}"
           body: |
             ## Description
 
@@ -144,5 +149,6 @@ jobs:
           labels: |
             dependencies
             automated
+          reviewers: brunoocasali
           delete-branch: true
 
