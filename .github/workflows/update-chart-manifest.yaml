@@ -34,6 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          token: ${{ secrets.MEILI_BOT_GH_PAT }}
           repository: ${{ fromJSON(steps.get-pr.outputs.result).head.repo.full_name }}
           ref: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
 
@@ -48,11 +49,11 @@ jobs:
           if [[ $has_changes == "true" ]]; then
             echo "There are changes in the Git working directory."
 
-            git config user.name "$GITHUB_ACTOR"
-            git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git config user.name "meili-bot"
+            git config user.email "meili-bot@users.noreply.github.com"
             git add .
             git commit -m "[CI] Syncing Helm manifest"
-            git push --set-upstream origin ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+            git push origin ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           else
             echo "No changes in the Git working directory."
           fi
