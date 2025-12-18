@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.30.0"
+    app.kubernetes.io/version: "v1.30.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 automountServiceAccountToken: false
@@ -20,7 +20,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.30.0"
+    app.kubernetes.io/version: "v1.30.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 data:
@@ -35,7 +35,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.30.0"
+    app.kubernetes.io/version: "v1.30.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -57,7 +57,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.30.0"
+    app.kubernetes.io/version: "v1.30.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -72,11 +72,11 @@ spec:
       labels:
         app.kubernetes.io/name: meilisearch
         app.kubernetes.io/instance: meilisearch
-        app.kubernetes.io/version: "v1.30.0"
+        app.kubernetes.io/version: "v1.30.1"
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 55f7b73c85467684ca3bcee6ec8df17202bd98712005e3fd6f440f9ba9bb41f3
+        checksum/config: 3a33e1537da1f03cf897979fea6978a7dd00470e4c96d8f4a6c7c312f5f452d8
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -95,7 +95,7 @@ spec:
             
       containers:
         - name: meilisearch
-          image: "getmeili/meilisearch:v1.30.0"
+          image: "getmeili/meilisearch:v1.30.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
