@@ -179,3 +179,5 @@ serviceMonitor:
   metricRelabelings: []
   # -- Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
   relabelings: []
+# -- Extra objects to deploy with the release
+extraDeploys: []
