@@ -8,9 +8,10 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.12.0"
+    app.kubernetes.io/version: "v1.33.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
+automountServiceAccountToken: false
 ---
 # Source: meilisearch/templates/configmap.yaml
 apiVersion: v1
@@ -21,7 +22,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.12.0"
+    app.kubernetes.io/version: "v1.33.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 data:
@@ -37,7 +38,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.12.0"
+    app.kubernetes.io/version: "v1.33.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -60,7 +61,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.12.0"
+    app.kubernetes.io/version: "v1.33.0"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -75,7 +76,7 @@ spec:
       labels:
         app.kubernetes.io/name: meilisearch
         app.kubernetes.io/instance: meilisearch
-        app.kubernetes.io/version: "v1.12.0"
+        app.kubernetes.io/version: "v1.33.0"
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
@@ -98,7 +99,7 @@ spec:
             
       containers:
         - name: meilisearch
-          image: "getmeili/meilisearch:v1.12.0"
+          image: "getmeili/meilisearch:v1.33.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
@@ -125,18 +126,21 @@ spec:
             periodSeconds: 1
             initialDelaySeconds: 1
             failureThreshold: 60
+            timeoutSeconds: 1
           livenessProbe:
             httpGet:
               path: /health
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /health
               port: http
             periodSeconds: 10
             initialDelaySeconds: 0
+            timeoutSeconds: 10
           resources:
             {}
 ---

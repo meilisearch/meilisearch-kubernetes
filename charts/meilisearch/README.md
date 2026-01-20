@@ -68,6 +68,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
 | image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name |
 | image.tag | string | `"v1.2.0"` | Meilisearch image tag |
+| image.digest | string | `""` | 	Meilisearch image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.className | string | `"nginx"` | Ingress ingressClassName |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
@@ -76,6 +77,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | ingress.tls | list | `[]` | TLS specification |
 | livenessProbe.InitialDelaySeconds | int | `0` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
+| livenessProbe.timeoutSeconds | int | `10` |  |
 | nameOverride | string | `""` | String to partially override meilisearch.fullname |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | persistence.accessMode | string | `"ReadWriteOnce"` | PVC Access Mode |
@@ -95,6 +97,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | podSecurityContext.runAsUser | int | `1000` |  |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
+| readinessProbe.timeoutSeconds | int | `10` |  |
 | replicaCount | int | `1` | Number of Meilisearch pods to run |
 | resources | object | `{}` | Resources allocation (Requests and Limits) |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -118,6 +121,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | startupProbe.InitialDelaySeconds | int | `1` |  |
 | startupProbe.failureThreshold | int | `60` |  |
 | startupProbe.periodSeconds | int | `1` |  |
+| startupProbe.timeoutSeconds | int | `1` |  |
 | tolerations | list | `[]` | Tolerations for pod assignment |
 | volumeMounts | list | `[]` | Additional volumes to mount on pod |
 | volumes | list | `[]` | Additional volumes for pod |

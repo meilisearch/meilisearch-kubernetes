@@ -6,30 +6,34 @@ startupProbe:
   periodSeconds: 1
   InitialDelaySeconds: 1
   failureThreshold: 60
-
+  timeoutSeconds: 1
+  path: "/health"
+  httpHeaders: []
 readinessProbe:
   periodSeconds: 10
   InitialDelaySeconds: 0
-
+  timeoutSeconds: 10
+  path: "/health"
+  httpHeaders: []
 livenessProbe:
   periodSeconds: 10
   InitialDelaySeconds: 0
-
+  timeoutSeconds: 10
+  path: "/health"
+  httpHeaders: []
 image:
   # -- Meilisearch image name
   repository: getmeili/meilisearch
   # -- Meilisearch image tag
-  tag: v1.12.0
+  tag: v1.33.0
   # -- Meilisearch image pull policy
   pullPolicy: IfNotPresent
   # -- Secret to authenticate against the docker registry
   pullSecret:
-
 # -- String to partially override meilisearch.fullname
 nameOverride: ""
 # -- String to fully override meilisearch.fullname
 fullnameOverride: ""
-
 # Environment loaded into the configMap
 environment:
   # -- Deactivates analytics
@@ -44,10 +48,8 @@ environment:
 auth:
   # -- Use an existing Kubernetes secret for the MEILI_MASTER_KEY
   existingMasterKeySecret: ""
-
 # -- Additional environment variables from ConfigMap or secrets
 envFrom: []
-
 serviceAccount:
   # You can use a specific pre-created service account instead of
   # the one created by this chart.
@@ -58,18 +60,17 @@ serviceAccount:
   name: ""
   # -- Additional annotations for created service account
   annotations: {}
-
+  ## @param serviceAccount.automountServiceAccountToken Allows auto mount of ServiceAccountToken on the serviceAccount created
+  ## Can be set to false if pods using this serviceAccount do not need to use K8s API
+  ##
+  automountServiceAccountToken: false
 podAnnotations: {}
-
 # -- Additional labels to add to the pod(s) only
 podLabels: {}
-
 # -- Additional labels to add to all resources
 customLabels: {}
-
 # -- Priority class name for pod
 priorityClassName: ""
-
 # -- Service HTTP port
 service:
   # -- Kubernetes Service type
@@ -77,33 +78,28 @@ service:
   port: 7700
   # -- Additional annotations for service
   annotations: {}
-
 container:
   containerPort: 7700
-
 podSecurityContext:
   runAsNonRoot: true
   runAsUser: 1000
   runAsGroup: 1000
   fsGroup: 1000
   fsGroupChangePolicy: OnRootMismatch
-
 securityContext:
   capabilities:
     drop:
       - ALL
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
-
 ingress:
   # -- Enable ingress controller resource
   enabled: false
   # -- Ingress ingressClassName
   className: nginx
   # -- Ingress annotations
-  annotations:
-    {}
-    # kubernetes.io/ingress.class: nginx
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
   # -- Path within the host
   path: /
   # -- List of hostnames
@@ -114,7 +110,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
 persistence:
   # -- Enable persistence using PVC
   enabled: false
@@ -129,7 +124,6 @@ persistence:
   ##
   # -- PVC Storage Class
   storageClass: ~
-
   ## Data Persistent Volume existing claim name
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
@@ -142,49 +136,41 @@ persistence:
   volume:
     name: data
     mountPath: /meili_data
-
 # -- Resources allocation (Requests and Limits)
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+resources: {}
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+# limits:
+#  cpu: 100m
+#  memory: 128Mi
+# requests:
+#  cpu: 100m
+#  memory: 128Mi
 
 # -- Additional volumes for pod
 volumes: []
-
 # -- Additional volumes to mount on pod
 volumeMounts: []
-
 # -- Additional containers for pod
 containers: []
-
 # -- Additional initContainers for pod
 initContainers: []
-
 # -- Node labels for pod assignment
 nodeSelector: {}
-
 # -- Tolerations for pod assignment
 tolerations: []
-
 # -- Affinity for pod assignment
 affinity: {}
-
 # -- Pod command
 command: []
-
 # -- Monitoring with Prometheus Operator
 serviceMonitor:
   # -- Enable ServiceMonitor to configure scraping
   enabled: false
+  # -- Set Namespace
+  namespace: null
   # -- Set of labels to transfer from the Kubernetes Service onto the target
   additionalLabels: {}
   # -- Set scraping frequency
