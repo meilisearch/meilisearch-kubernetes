@@ -1,3 +1,0 @@
-status = ['linter', 'helm-tests', 'check-chart-manifest-in-sync']
-# 1 hour timeout
-timeout-sec = 3600
