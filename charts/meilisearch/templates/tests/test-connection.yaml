@@ -14,5 +14,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "meilisearch.fullname" . }}:{{ .Values.service.port }}']
+      args:  ['--spider', '--timeout=5', '{{ include "meilisearch.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never
