@@ -76,7 +76,7 @@ spec:
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 0135270fc5e0281cdcbd9d2530da37189a1ef1be9e3957163b0549fb2e3777da
+        checksum/config: 4fd7cc94794d90cd39e5cef6eaadbb94e894e99ddbf5160325dba02fd008cd3b
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -155,5 +155,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['--spider', '--timeout=5', 'meilisearch:7700']
+      args: ['--spider', '--timeout=5', 'meilisearch:7700']
   restartPolicy: Never
