@@ -96,7 +96,7 @@ helm uninstall <your-service-name>
 
 ## 🤖 Compatibility with Meilisearch
 
-This chart only guarantees the compatibility with the [version v1.32.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.32.0).
+This chart only guarantees the compatibility with the [version v1.35.0 of Meilisearch](https://github.com/meilisearch/meilisearch/releases/tag/v1.35.0).
 
 ## ⚙️ Development Workflow and Contributing
 
