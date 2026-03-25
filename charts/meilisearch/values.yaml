@@ -110,6 +110,28 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+## TLS configuration for pod-level encryption
+tls:
+  # -- Enable TLS for the Meilisearch server
+  enabled: false
+  # -- Name of existing Kubernetes TLS secret (must contain tls.crt and tls.key)
+  existingSecret: ""
+  # -- Mount path for TLS certificates inside the container
+  mountPath: /etc/meilisearch/tls
+  # -- Certificate filename in the secret
+  certFilename: tls.crt
+  # -- Key filename in the secret
+  keyFilename: tls.key
+  # -- Enable SSL session resumption
+  resumption: false
+  # -- Enable SSL tickets
+  tickets: false
+  # -- Name of existing secret containing OCSP responder file
+  existingOcspSecret: ""
+  # -- OCSP responder filename in the secret
+  ocspFilename: ocsp.der
+
 persistence:
   # -- Enable persistence using PVC
   enabled: false
@@ -185,3 +207,7 @@ serviceMonitor:
   metricRelabelings: []
   # -- Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
   relabelings: []
+  # -- TLS configuration for scraping when tls.enabled is true.
+  # Follows the Prometheus Operator TLSConfig spec.
+  # Example for self-signed certs: tlsConfig: {insecureSkipVerify: true}
+  tlsConfig: {}

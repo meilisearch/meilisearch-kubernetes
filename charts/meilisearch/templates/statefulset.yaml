@@ -46,6 +46,18 @@ spec:
         - name: {{ .Values.persistence.volume.name }}
           emptyDir: {}
         {{- end }}
+        {{- if .Values.tls.enabled }}
+        - name: tls-certs
+          secret:
+            secretName: {{ .Values.tls.existingSecret }}
+            defaultMode: 0400
+        {{- end }}
+        {{- if .Values.tls.existingOcspSecret }}
+        - name: tls-ocsp
+          secret:
+            secretName: {{ .Values.tls.existingOcspSecret }}
+            defaultMode: 0400
+        {{- end }}
         {{- if .Values.volumes }}
 {{ toYaml .Values.volumes | indent 8 }}
         {{- end }}
@@ -66,6 +78,16 @@ spec:
               mountPath: /tmp
             - name: {{ .Values.persistence.volume.name }}
               mountPath: {{ .Values.persistence.volume.mountPath }}
+            {{- if .Values.tls.enabled }}
+            - name: tls-certs
+              mountPath: {{ .Values.tls.mountPath }}
+              readOnly: true
+            {{- end }}
+            {{- if .Values.tls.existingOcspSecret }}
+            - name: tls-ocsp
+              mountPath: {{ .Values.tls.mountPath }}/ocsp
+              readOnly: true
+            {{- end }}
             {{- if .Values.volumeMounts }}
 {{ toYaml .Values.volumeMounts | indent 12 }}
             {{- end }}
@@ -79,6 +101,25 @@ spec:
           {{- if .Values.envFrom }}
 {{ toYaml .Values.envFrom | indent 10 }}
           {{- end }}
+          {{- if .Values.tls.enabled }}
+          env:
+            - name: MEILI_SSL_CERT_PATH
+              value: {{ printf "%s/%s" .Values.tls.mountPath .Values.tls.certFilename | quote }}
+            - name: MEILI_SSL_KEY_PATH
+              value: {{ printf "%s/%s" .Values.tls.mountPath .Values.tls.keyFilename | quote }}
+            {{- if .Values.tls.resumption }}
+            - name: MEILI_SSL_RESUMPTION
+              value: "true"
+            {{- end }}
+            {{- if .Values.tls.tickets }}
+            - name: MEILI_SSL_TICKETS
+              value: "true"
+            {{- end }}
+            {{- if .Values.tls.existingOcspSecret }}
+            - name: MEILI_SSL_OCSP_PATH
+              value: {{ printf "%s/ocsp/%s" .Values.tls.mountPath .Values.tls.ocspFilename | quote }}
+            {{- end }}
+          {{- end }}
           {{- if ne (len .Values.command) 0 }}
           command:
 {{ toYaml .Values.command | indent 12 }}
@@ -91,6 +132,9 @@ spec:
             httpGet:
               path: {{ .Values.startupProbe.path }}
               port: http
+              {{- if .Values.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
               {{- if .Values.startupProbe.httpHeaders }}
               httpHeaders:
                 {{- toYaml .Values.startupProbe.httpHeaders | nindent 14 }}
@@ -103,6 +147,9 @@ spec:
             httpGet:
               path: {{ .Values.livenessProbe.path }}
               port: http
+              {{- if .Values.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
               {{- if .Values.livenessProbe.httpHeaders }}
               httpHeaders:
                 {{- toYaml .Values.livenessProbe.httpHeaders | nindent 14 }}
@@ -114,6 +161,9 @@ spec:
             httpGet:
               path: {{ .Values.readinessProbe.path }}
               port: http
+              {{- if .Values.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
               {{- if .Values.readinessProbe.httpHeaders }}
               httpHeaders:
                 {{- toYaml .Values.readinessProbe.httpHeaders | nindent 14 }}
