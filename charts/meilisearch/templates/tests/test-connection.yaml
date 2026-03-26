@@ -14,5 +14,13 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['--spider', '--timeout=5', '{{ include "meilisearch.fullname" . }}:{{ .Values.service.port }}']
+      args:
+        - '--spider'
+        - '--timeout=5'
+        {{- if .Values.tls.enabled }}
+        - '--no-check-certificate'
+        - 'https://{{ include "meilisearch.fullname" . }}:{{ .Values.service.port }}'
+        {{- else }}
+        - '{{ include "meilisearch.fullname" . }}:{{ .Values.service.port }}'
+        {{- end }}
   restartPolicy: Never

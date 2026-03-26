@@ -1,3 +1,6 @@
+{{- if and .Values.tls.enabled (not .Values.tls.existingSecret) }}
+{{- fail "tls.existingSecret is required when tls.enabled is true" }}
+{{- end }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:

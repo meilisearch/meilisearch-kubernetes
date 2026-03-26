@@ -155,5 +155,8 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['--spider', '--timeout=5', 'meilisearch:7700']
+      args:
+        - '--spider'
+        - '--timeout=5'
+        - 'meilisearch:7700'
   restartPolicy: Never
