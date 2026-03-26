@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
+![Version: 0.30.0](https://img.shields.io/badge/Version-0.30.0-informational?style=flat-square) ![AppVersion: v1.40.0](https://img.shields.io/badge/AppVersion-v1.40.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -67,15 +67,17 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | image.pullPolicy | string | `"IfNotPresent"` | Meilisearch image pull policy |
 | image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
 | image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name |
-| image.tag | string | `"v1.2.0"` | Meilisearch image tag |
-| image.digest | string | `""` | 	Meilisearch image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag |
+| image.tag | string | `"v1.40.0"` | Meilisearch image tag |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.className | string | `"nginx"` | Ingress ingressClassName |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
 | ingress.hosts | list | `["meilisearch-example.local"]` | List of hostnames |
 | ingress.path | string | `"/"` | Path within the host |
 | ingress.tls | list | `[]` | TLS specification |
+| initContainers | list | `[]` | Additional initContainers for pod |
 | livenessProbe.InitialDelaySeconds | int | `0` |  |
+| livenessProbe.httpHeaders | list | `[]` |  |
+| livenessProbe.path | string | `"/health"` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | livenessProbe.timeoutSeconds | int | `10` |  |
 | nameOverride | string | `""` | String to partially override meilisearch.fullname |
@@ -85,7 +87,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.enabled | bool | `false` | Enable persistence using PVC |
 | persistence.existingClaim | string | `""` | Existing PVC |
 | persistence.size | string | `"10Gi"` | PVC Storage Request |
-| persistence.storageClass | string | `"-"` | PVC Storage Class |
+| persistence.storageClass | string | `nil` | PVC Storage Class |
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
 | persistence.volume.name | string | `"data"` |  |
 | podAnnotations | object | `{}` |  |
@@ -95,10 +97,12 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | podSecurityContext.runAsGroup | int | `1000` |  |
 | podSecurityContext.runAsNonRoot | bool | `true` |  |
 | podSecurityContext.runAsUser | int | `1000` |  |
+| priorityClassName | string | `""` | Priority class name for pod |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
+| readinessProbe.httpHeaders | list | `[]` |  |
+| readinessProbe.path | string | `"/health"` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | readinessProbe.timeoutSeconds | int | `10` |  |
-| replicaCount | int | `1` | Number of Meilisearch pods to run |
 | resources | object | `{}` | Resources allocation (Requests and Limits) |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -107,24 +111,36 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | service.annotations | object | `{}` | Additional annotations for service |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type |
 | serviceAccount.annotations | object | `{}` | Additional annotations for created service account |
+| serviceAccount.automountServiceAccountToken | bool | `false` |  |
 | serviceAccount.create | bool | `true` | Should this chart create a service account |
 | serviceAccount.name | string | `""` | Custom service account name, if not created by this chart |
-| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics"}` | Monitoring with Prometheus Operator |
+| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"namespace":null,"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics","tlsConfig":{}}` | Monitoring with Prometheus Operator |
 | serviceMonitor.additionalLabels | object | `{}` | Set of labels to transfer from the Kubernetes Service onto the target |
 | serviceMonitor.enabled | bool | `false` | Enable ServiceMonitor to configure scraping |
 | serviceMonitor.interval | string | `"1m"` | Set scraping frequency |
 | serviceMonitor.metricRelabelings | list | `[]` | MetricRelabelConfigs to apply to samples before ingestion |
+| serviceMonitor.namespace | string | `nil` | Set Namespace |
 | serviceMonitor.relabelings | list | `[]` | Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config |
-| serviceMonitor.scrapeTimeout | string | `"10s"` | Set scraping timeout  |
+| serviceMonitor.scrapeTimeout | string | `"10s"` | Set scraping timeout |
 | serviceMonitor.targetLabels | list | `[]` | Set of labels to transfer from the Kubernetes Service onto the target |
 | serviceMonitor.telemetryPath | string | `"/metrics"` | Set path to metrics |
+| serviceMonitor.tlsConfig | object | `{}` | TLS configuration for scraping when tls.enabled is true. Follows the Prometheus Operator TLSConfig spec. Example for self-signed certs: tlsConfig: {insecureSkipVerify: true} |
 | startupProbe.InitialDelaySeconds | int | `1` |  |
 | startupProbe.failureThreshold | int | `60` |  |
+| startupProbe.httpHeaders | list | `[]` |  |
+| startupProbe.path | string | `"/health"` |  |
 | startupProbe.periodSeconds | int | `1` |  |
 | startupProbe.timeoutSeconds | int | `1` |  |
+| tls.certFilename | string | `"tls.crt"` | Certificate filename in the secret |
+| tls.enabled | bool | `false` | Enable TLS for the Meilisearch server |
+| tls.existingOcspSecret | string | `""` | Name of existing secret containing OCSP responder file |
+| tls.existingSecret | string | `""` | Name of existing Kubernetes TLS secret (must contain tls.crt and tls.key) |
+| tls.keyFilename | string | `"tls.key"` | Key filename in the secret |
+| tls.mountPath | string | `"/etc/meilisearch/tls"` | Mount path for TLS certificates inside the container |
+| tls.ocspFilename | string | `"ocsp.der"` | OCSP responder filename in the secret |
+| tls.resumption | bool | `false` | Enable SSL session resumption |
+| tls.tickets | bool | `false` | Enable SSL tickets |
 | tolerations | list | `[]` | Tolerations for pod assignment |
 | volumeMounts | list | `[]` | Additional volumes to mount on pod |
 | volumes | list | `[]` | Additional volumes for pod |
 
-----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
