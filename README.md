@@ -11,7 +11,7 @@
   <a href="https://discord.meilisearch.com">Discord</a> |
   <a href="https://www.meilisearch.com">Website</a> |
   <a href="https://blog.meilisearch.com">Blog</a> |
-  <a href="https://www.meilisearch.com/docs/faq">FAQ</a>
+  <a href="https://www.meilisearch.com/docs/learn/resources/faq">FAQ</a>
 </h4>
 
 <p align="center">
@@ -32,7 +32,7 @@
 
 ## 📖 Documentation
 
-See our [Documentation](https://www.meilisearch.com/docs/learn/getting_started/installation) or our [API References](https://www.meilisearch.com/docs/reference/api/overview).
+See our [Documentation](https://www.meilisearch.com/docs/learn/self_hosted/install_meilisearch_locally) or our [API References](https://www.meilisearch.com/docs/reference/api/authorization).
 
 ## ⚡ Supercharge your Meilisearch experience
 
