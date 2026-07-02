@@ -32,7 +32,7 @@ jobs:
 
       # Now checkout the PR, generate the template and then commit to the PR
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.MEILI_BOT_GH_PAT }}
           repository: ${{ fromJSON(steps.get-pr.outputs.result).head.repo.full_name }}
