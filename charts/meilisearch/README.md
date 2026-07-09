@@ -2,7 +2,7 @@
 
 A Helm chart for the Meilisearch search engine
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![AppVersion: v1.2.0](https://img.shields.io/badge/AppVersion-v1.2.0-informational?style=flat-square)
+![Version: 0.20.0](https://img.shields.io/badge/Version-0.20.0-informational?style=flat-square) ![AppVersion: v1.31.0](https://img.shields.io/badge/AppVersion-v1.31.0-informational?style=flat-square)
 
 Helm works as a package manager to run pre-configured Kubernetes resources.
 
@@ -63,18 +63,19 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | envFrom | list | `[]` | Additional environment variables from ConfigMap or secrets |
 | environment.MEILI_ENV | string | `"development"` | Sets the environment. Either **production** or **development** |
 | environment.MEILI_NO_ANALYTICS | bool | `true` | Deactivates analytics |
+| extraDeploys | list | `[]` | Extra objects to deploy with the release |
 | fullnameOverride | string | `""` | String to fully override meilisearch.fullname |
 | image.pullPolicy | string | `"IfNotPresent"` | Meilisearch image pull policy |
 | image.pullSecret | string | `nil` | Secret to authenticate against the docker registry |
 | image.repository | string | `"getmeili/meilisearch"` | Meilisearch image name |
-| image.tag | string | `"v1.2.0"` | Meilisearch image tag |
-| image.digest | string | `""` | 	Meilisearch image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag |
+| image.tag | string | `"v1.31.0"` | Meilisearch image tag |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.className | string | `"nginx"` | Ingress ingressClassName |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
 | ingress.hosts | list | `["meilisearch-example.local"]` | List of hostnames |
 | ingress.path | string | `"/"` | Path within the host |
 | ingress.tls | list | `[]` | TLS specification |
+| initContainers | list | `[]` | Additional initContainers for pod |
 | livenessProbe.InitialDelaySeconds | int | `0` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | livenessProbe.timeoutSeconds | int | `10` |  |
@@ -85,7 +86,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | persistence.enabled | bool | `false` | Enable persistence using PVC |
 | persistence.existingClaim | string | `""` | Existing PVC |
 | persistence.size | string | `"10Gi"` | PVC Storage Request |
-| persistence.storageClass | string | `"-"` | PVC Storage Class |
+| persistence.storageClass | string | `nil` | PVC Storage Class |
 | persistence.volume.mountPath | string | `"/meili_data"` |  |
 | persistence.volume.name | string | `"data"` |  |
 | podAnnotations | object | `{}` |  |
@@ -95,10 +96,10 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | podSecurityContext.runAsGroup | int | `1000` |  |
 | podSecurityContext.runAsNonRoot | bool | `true` |  |
 | podSecurityContext.runAsUser | int | `1000` |  |
+| priorityClassName | string | `""` | Priority class name for pod |
 | readinessProbe.InitialDelaySeconds | int | `0` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | readinessProbe.timeoutSeconds | int | `10` |  |
-| replicaCount | int | `1` | Number of Meilisearch pods to run |
 | resources | object | `{}` | Resources allocation (Requests and Limits) |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -107,15 +108,17 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | service.annotations | object | `{}` | Additional annotations for service |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type |
 | serviceAccount.annotations | object | `{}` | Additional annotations for created service account |
+| serviceAccount.automountServiceAccountToken | bool | `false` |  |
 | serviceAccount.create | bool | `true` | Should this chart create a service account |
 | serviceAccount.name | string | `""` | Custom service account name, if not created by this chart |
-| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics"}` | Monitoring with Prometheus Operator |
+| serviceMonitor | object | `{"additionalLabels":{},"enabled":false,"interval":"1m","metricRelabelings":[],"namespace":null,"relabelings":[],"scrapeTimeout":"10s","targetLabels":[],"telemetryPath":"/metrics"}` | Monitoring with Prometheus Operator |
 | serviceMonitor.additionalLabels | object | `{}` | Set of labels to transfer from the Kubernetes Service onto the target |
 | serviceMonitor.enabled | bool | `false` | Enable ServiceMonitor to configure scraping |
 | serviceMonitor.interval | string | `"1m"` | Set scraping frequency |
 | serviceMonitor.metricRelabelings | list | `[]` | MetricRelabelConfigs to apply to samples before ingestion |
+| serviceMonitor.namespace | string | `nil` | Set Namespace |
 | serviceMonitor.relabelings | list | `[]` | Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config |
-| serviceMonitor.scrapeTimeout | string | `"10s"` | Set scraping timeout  |
+| serviceMonitor.scrapeTimeout | string | `"10s"` | Set scraping timeout |
 | serviceMonitor.targetLabels | list | `[]` | Set of labels to transfer from the Kubernetes Service onto the target |
 | serviceMonitor.telemetryPath | string | `"/metrics"` | Set path to metrics |
 | startupProbe.InitialDelaySeconds | int | `1` |  |
@@ -127,4 +130,4 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | volumes | list | `[]` | Additional volumes for pod |
 
 ----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
+Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2)
