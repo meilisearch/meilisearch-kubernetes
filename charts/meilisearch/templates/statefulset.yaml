@@ -83,6 +83,10 @@ spec:
           command:
 {{ toYaml .Values.command | indent 12 }}
           {{- end }}
+          {{- if ne (len .Values.args) 0 }}
+          args:
+{{ toYaml .Values.args | indent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.container.containerPort }}

@@ -165,6 +165,8 @@ tolerations: []
 affinity: {}
 # -- Pod command
 command: []
+# -- Pod arguments
+args: []
 # -- Monitoring with Prometheus Operator
 serviceMonitor:
   # -- Enable ServiceMonitor to configure scraping
