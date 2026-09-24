@@ -5,7 +5,9 @@ on:
 
 jobs:
   sync-chart-manifest-on-comment:
-    if: contains(github.event.comment.body, '@meilisearch sync-manifest')
+    if: |
+      contains(github.event.comment.body, '@meilisearch sync-manifest') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
     name: Sync chart manifest on comment
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +39,7 @@ jobs:
           token: ${{ secrets.MEILI_BOT_GH_PAT }}
           repository: ${{ fromJSON(steps.get-pr.outputs.result).head.repo.full_name }}
           ref: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+          persist-credentials: false
 
       - name: Run helm template
         id: helm_template
@@ -44,7 +47,13 @@ jobs:
           helm template meilisearch charts/meilisearch | grep -v 'helm.sh/chart:\|app.kubernetes.io/managed-by:' > manifests/meilisearch.yaml
           echo "has_changes=$(if git diff --quiet && git diff --quiet --cached; then echo "false"; else echo "true"; fi)" >> "$GITHUB_ENV"
 
+      # head.ref and head.repo.full_name come from the PR fork: pass them through
+      # quoted environment variables, never interpolate them into the script
       - name: Commit manifest changes
+        env:
+          HEAD_REPO: ${{ fromJSON(steps.get-pr.outputs.result).head.repo.full_name }}
+          HEAD_REF: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+          GH_PAT: ${{ secrets.MEILI_BOT_GH_PAT }}
         run: |
           if [[ $has_changes == "true" ]]; then
             echo "There are changes in the Git working directory."
@@ -53,7 +62,7 @@ jobs:
             git config user.email "meili-bot@users.noreply.github.com"
             git add .
             git commit -m "[CI] Syncing Helm manifest"
-            git push origin ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+            git push "https://x-access-token:${GH_PAT}@github.com/${HEAD_REPO}" "HEAD:refs/heads/${HEAD_REF}"
           else
             echo "No changes in the Git working directory."
           fi
