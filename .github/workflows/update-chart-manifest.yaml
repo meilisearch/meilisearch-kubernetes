@@ -10,6 +10,8 @@ jobs:
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
     name: Sync chart manifest on comment
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
       # There isn't enough detail in the github.event on "issue_comment" events about the PR origin, so we need to fetch more
       - name: "Get Pull Request"
