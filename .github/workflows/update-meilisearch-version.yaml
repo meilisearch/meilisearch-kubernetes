@@ -65,6 +65,7 @@ jobs:
           fi
 
       - name: Update Chart.yaml
+        id: chart
         if: steps.check.outputs.needs_update == 'true'
         run: |
           # Update appVersion
@@ -73,7 +74,10 @@ jobs:
           ESCAPED_VERSION=$(printf '%s\n' "$NEW_VERSION" | sed 's/[\/&]/\\&/g')
           sed -i "s/^appVersion: .*/appVersion: \"$ESCAPED_VERSION\"/" charts/meilisearch/Chart.yaml
 
-          # Increment chart minor version (e.g., 0.17.1 -> 0.18.0)
+          # Bump the chart version according to the Meilisearch release type:
+          # - new Meilisearch major/minor (e.g., v1.55.2 -> v1.56.0) => chart minor bump (e.g., 0.40.1 -> 0.41.0)
+          # - new Meilisearch patch       (e.g., v1.56.0 -> v1.56.1) => chart patch bump (e.g., 0.41.0 -> 0.41.1)
+          CURRENT_APP_VERSION="${{ steps.current.outputs.current_version }}"
           CURRENT_CHART_VERSION=$(grep -oP '^version: \K.*' charts/meilisearch/Chart.yaml)
 
           # Validate CURRENT_CHART_VERSION is not empty
@@ -82,23 +86,37 @@ jobs:
             exit 1
           fi
 
+          # Extract MAJOR.MINOR from Meilisearch versions (strip "v" prefix and pre-release/build suffixes)
+          app_major_minor() {
+            printf '%s' "$1" | sed -E 's/^v//; s/[-+].*$//' | cut -d. -f1,2
+          }
+          CURRENT_APP_MAJOR_MINOR=$(app_major_minor "$CURRENT_APP_VERSION")
+          NEW_APP_MAJOR_MINOR=$(app_major_minor "$NEW_VERSION")
+
           MAJOR=$(echo "$CURRENT_CHART_VERSION" | cut -d. -f1)
           MINOR=$(echo "$CURRENT_CHART_VERSION" | cut -d. -f2)
+          PATCH=$(echo "$CURRENT_CHART_VERSION" | cut -d. -f3)
 
-          # Validate MAJOR and MINOR are numeric
-          if ! [[ "$MAJOR" =~ ^[0-9]+$ ]]; then
-            echo "::error::Invalid MAJOR version '$MAJOR' (expected numeric) in Chart.yaml version '$CURRENT_CHART_VERSION'"
-            exit 1
-          fi
-          if ! [[ "$MINOR" =~ ^[0-9]+$ ]]; then
-            echo "::error::Invalid MINOR version '$MINOR' (expected numeric) in Chart.yaml version '$CURRENT_CHART_VERSION'"
-            exit 1
+          # Validate MAJOR, MINOR and PATCH are numeric
+          for PART in "$MAJOR" "$MINOR" "$PATCH"; do
+            if ! [[ "$PART" =~ ^[0-9]+$ ]]; then
+              echo "::error::Invalid version component '$PART' (expected numeric) in Chart.yaml version '$CURRENT_CHART_VERSION'"
+              exit 1
+            fi
+          done
+
+          if [ "$CURRENT_APP_MAJOR_MINOR" = "$NEW_APP_MAJOR_MINOR" ]; then
+            BUMP_TYPE="patch"
+            NEW_CHART_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+          else
+            BUMP_TYPE="minor"
+            NEW_CHART_VERSION="${MAJOR}.$((MINOR + 1)).0"
           fi
 
-          NEW_MINOR=$((MINOR + 1))
-          NEW_CHART_VERSION="${MAJOR}.${NEW_MINOR}.0"
           sed -i "s/^version: .*/version: $NEW_CHART_VERSION/" charts/meilisearch/Chart.yaml
-          echo "📊 Chart version: $CURRENT_CHART_VERSION -> $NEW_CHART_VERSION"
+          echo "📊 Chart version ($BUMP_TYPE bump): $CURRENT_CHART_VERSION -> $NEW_CHART_VERSION"
+          echo "bump_type=$BUMP_TYPE" >> "$GITHUB_OUTPUT"
+          echo "chart_version=$NEW_CHART_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Update README.md compatibility section
         if: steps.check.outputs.needs_update == 'true'
@@ -133,7 +151,7 @@ jobs:
             ## Changes
 
             - Updated `appVersion` in `Chart.yaml`
-            - Bumped chart `version` (minor) in `Chart.yaml`
+            - Bumped chart `version` (${{ steps.chart.outputs.bump_type }}) to `${{ steps.chart.outputs.chart_version }}` in `Chart.yaml`
             - Updated `image.tag` in `values.yaml`
             - Updated compatibility section in `README.md`
             - Regenerated `manifests/meilisearch.yaml`
