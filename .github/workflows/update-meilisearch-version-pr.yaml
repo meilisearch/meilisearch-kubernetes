@@ -1,0 +1,126 @@
+name: Update Meilisearch Version PR
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  rebuild-version-pr-on-comment:
+    if: |
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '@meilisearch update-version') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
+    name: Rebuild Meilisearch version PR on top of main
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    concurrency:
+      group: update-meilisearch-version-pr-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    steps:
+      # There isn't enough detail in the github.event on "issue_comment" events about the PR origin, so we need to fetch more
+      - name: "Get Pull Request"
+        uses: actions/github-script@v9
+        id: get-pr
+        with:
+          script: |
+            const request = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            }
+
+            core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`)
+
+            try {
+              const result = await github.rest.pulls.get(request)
+              return result.data
+            } catch (err) {
+              core.setFailed(`Request failed with error ${err}`)
+            }
+
+      # Only rebuild open PRs created by the update-meilisearch-version workflow in this repository
+      - name: Validate Pull Request
+        env:
+          HEAD_REPO: ${{ fromJSON(steps.get-pr.outputs.result).head.repo.full_name }}
+          HEAD_REF: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+          BASE_REF: ${{ fromJSON(steps.get-pr.outputs.result).base.ref }}
+          PR_STATE: ${{ fromJSON(steps.get-pr.outputs.result).state }}
+        run: |
+          if [ "$PR_STATE" != "open" ]; then
+            echo "::error::PR is not open"
+            exit 1
+          fi
+          if [ "$HEAD_REPO" != "$GITHUB_REPOSITORY" ] || [[ "$HEAD_REF" != bump/meilisearch-* ]] || [ "$BASE_REF" != "main" ]; then
+            echo "::error::Only PRs from '$GITHUB_REPOSITORY' branches named 'bump/meilisearch-*' targeting main can be rebuilt"
+            exit 1
+          fi
+
+      # Checkout main (not the PR branch): the bump script and the resulting files come from main
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Get PR Meilisearch version
+        id: pr-version
+        env:
+          HEAD_REF: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+        run: |
+          git fetch origin "refs/heads/${HEAD_REF}:refs/remotes/origin/${HEAD_REF}"
+          VERSION=$(git show "origin/${HEAD_REF}:charts/meilisearch/Chart.yaml" | grep -oP 'appVersion: "\K[^"]+')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "📦 PR Meilisearch version: $VERSION"
+
+      - name: Bump Meilisearch version
+        id: bump
+        env:
+          VERSION: ${{ steps.pr-version.outputs.version }}
+        run: .github/scripts/bump-meilisearch-version.sh "$VERSION"
+
+      # Replace the PR branch with a fresh bump commit on top of main
+      - name: Push rebuilt branch
+        if: steps.bump.outputs.needs_update == 'true'
+        env:
+          HEAD_REF: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+          HEAD_SHA: ${{ fromJSON(steps.get-pr.outputs.result).head.sha }}
+          NEW_VERSION: ${{ steps.bump.outputs.new_version }}
+          GH_PAT: ${{ secrets.MEILI_BOT_GH_PAT }}
+        run: |
+          git config user.name "meili-bot"
+          git config user.email "meili-bot@users.noreply.github.com"
+          git add .
+          git commit -m "chore(version): bump Meilisearch to ${NEW_VERSION}"
+          git push --force-with-lease="refs/heads/${HEAD_REF}:${HEAD_SHA}" \
+            "https://x-access-token:${GH_PAT}@github.com/${GITHUB_REPOSITORY}" "HEAD:refs/heads/${HEAD_REF}"
+
+      - name: Update PR description and comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          NEEDS_UPDATE: ${{ steps.bump.outputs.needs_update }}
+          NEW_VERSION: ${{ steps.pr-version.outputs.version }}
+          BUMP_TYPE: ${{ steps.bump.outputs.bump_type }}
+          CHART_VERSION: ${{ steps.bump.outputs.chart_version }}
+        run: |
+          if [ "$NEEDS_UPDATE" != "true" ]; then
+            gh pr comment "$PR_NUMBER" --body "\`main\` is already on Meilisearch \`${NEW_VERSION}\`, nothing to update. This PR can be closed."
+            exit 0
+          fi
+
+          gh pr view "$PR_NUMBER" --json body --jq .body \
+            | sed -E "s|^- Bumped chart \`version\`.*|- Bumped chart \`version\` (${BUMP_TYPE}) to \`${CHART_VERSION}\` in \`Chart.yaml\`|" \
+            > body.md
+          gh pr edit "$PR_NUMBER" --body-file body.md
+
+          gh pr comment "$PR_NUMBER" --body "Rebuilt on top of \`main\`: Meilisearch \`${NEW_VERSION}\`, chart version \`${CHART_VERSION}\` (${BUMP_TYPE} bump)."
+
+      - name: Comment on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: gh pr comment "$PR_NUMBER" --body "Failed to rebuild this PR, see the [workflow run](${RUN_URL})."

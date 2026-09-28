@@ -92,6 +92,13 @@ Or just by comment the PR:
 @meilisearch sync-manifest
 ```
 
+PRs opened automatically when a new Meilisearch version is released (`bump/meilisearch-*` branches) bump the chart version according to the Meilisearch release: a new Meilisearch minor bumps the chart minor (e.g., `0.40.0` -> `0.41.0`), a new Meilisearch patch bumps the chart patch (e.g., `0.41.0` -> `0.41.1`).
+If such a PR gets outdated (e.g., another PR bumped the chart version first), rebuild it on top of `main` with the next available chart version by commenting the PR:
+
+```
+@meilisearch update-version
+```
+
 Additionally, the GitHub CI will run a test to check if there are changes introduced to the charts. If changes were introduced, it will require you to update the Chart version.
 
 ### Generate Documentation <!-- omit in toc -->
