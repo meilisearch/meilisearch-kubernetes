@@ -7,10 +7,11 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.56.0"
+    app.kubernetes.io/version: "v1.56.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 automountServiceAccountToken: false
+
 ---
 # Source: meilisearch/templates/configmap.yaml
 apiVersion: v1
@@ -20,12 +21,13 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.56.0"
+    app.kubernetes.io/version: "v1.56.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 data:
   MEILI_ENV: "development"
   MEILI_NO_ANALYTICS: "true"
+
 ---
 # Source: meilisearch/templates/service.yaml
 apiVersion: v1
@@ -35,7 +37,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.56.0"
+    app.kubernetes.io/version: "v1.56.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -48,6 +50,7 @@ spec:
   selector:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
+
 ---
 # Source: meilisearch/templates/statefulset.yaml
 apiVersion: apps/v1
@@ -57,7 +60,7 @@ metadata:
   labels:
     app.kubernetes.io/name: meilisearch
     app.kubernetes.io/instance: meilisearch
-    app.kubernetes.io/version: "v1.56.0"
+    app.kubernetes.io/version: "v1.56.1"
     app.kubernetes.io/component: search-engine
     app.kubernetes.io/part-of: meilisearch
 spec:
@@ -72,11 +75,11 @@ spec:
       labels:
         app.kubernetes.io/name: meilisearch
         app.kubernetes.io/instance: meilisearch
-        app.kubernetes.io/version: "v1.56.0"
+        app.kubernetes.io/version: "v1.56.1"
         app.kubernetes.io/component: search-engine
         app.kubernetes.io/part-of: meilisearch
       annotations:
-        checksum/config: 26edd5afb060523640f370ec30453a2a6df9b1b4b56bb932dbc4e45d0144e143
+        checksum/config: d856db84b2805d42698e797d468f9c81614ca35b555fcf9fb89de212c77cf917
     spec:
       serviceAccountName: meilisearch
       securityContext:
@@ -95,7 +98,7 @@ spec:
             
       containers:
         - name: meilisearch
-          image: "getmeili/meilisearch:v1.56.0"
+          image: "getmeili/meilisearch:v1.56.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
@@ -157,3 +160,4 @@ spec:
       command: ['wget']
       args: ['--spider', '--timeout=5', 'meilisearch:7700']
   restartPolicy: Never
+
