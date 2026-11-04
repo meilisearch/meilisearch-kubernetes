@@ -57,6 +57,7 @@ You can also use `auth.existingMasterKeySecret` to use an existing secret that h
 | affinity | object | `{}` | Affinity for pod assignment |
 | auth.existingMasterKeySecret | string | `""` | Use an existing Kubernetes secret for the MEILI_MASTER_KEY |
 | command | list | `[]` | Pod command |
+| args | list | `[]` | Pod args |
 | container.containerPort | int | `7700` |  |
 | containers | list | `[]` | Additional containers for pod |
 | customLabels | object | `{}` | Additional labels to add to all resources |
