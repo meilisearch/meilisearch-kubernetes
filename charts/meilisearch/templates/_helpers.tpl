@@ -35,7 +35,9 @@ Create chart name and version as used by the chart label.
 helm.sh/chart: {{ include "meilisearch.chart" . }}
 {{ include "meilisearch.selectorLabels" . }}
 {{- if or .Chart.AppVersion .Values.image.tag }}
-app.kubernetes.io/version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
+{{- $rawVersion := .Values.image.tag | default .Chart.AppVersion }}
+{{- $version := regexReplaceAll "@sha256:[a-f0-9]+" $rawVersion "" | trunc 63 | trimSuffix "-" }}
+app.kubernetes.io/version: {{ $version | quote }}
 {{- end }}
 app.kubernetes.io/component: search-engine
 app.kubernetes.io/part-of: {{ template "meilisearch.name" . }}
