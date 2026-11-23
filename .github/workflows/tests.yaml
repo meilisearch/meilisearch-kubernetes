@@ -31,7 +31,7 @@ jobs:
         run: ct lint --config ct.yaml
 
   helm-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -67,7 +67,7 @@ jobs:
 
   check-chart-manifest-in-sync:
     name: check-chart-manifest-in-sync
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
